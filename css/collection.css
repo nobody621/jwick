@@ -1,0 +1,445 @@
+/* css/collection-page.css */
+
+/* Ensure this file is linked AFTER your main styles.css in the HTML
+   It assumes variables like --primary-deep-charcoal, --accent-antique-gold, etc.,
+   and utility classes like .section, .container, .animated-item are defined in styles.css */
+
+/* --- COLLECTION PAGE SPECIFIC STYLES --- */
+
+/* Active link styling for mobile navigation */
+.main-nav-link.active-mobile-link span {
+    color: var(--accent-antique-gold);
+}
+.main-nav-link.active-mobile-link:hover span {
+    color: var(--accent-antique-gold); /* Keep gold on hover if active */
+}
+
+/* --- COLLECTION HERO SECTION --- */
+/* Reusing existing hero from index.html as per provided HTML structure */
+
+
+/* --- FILTERS AND INTRODUCTION SECTION --- */
+#collection-intro-filters {
+    padding-top: 80px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.collection-controls-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.collection-intro-text .section-title-alt {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.collection-intro-text p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+    opacity: 0.8;
+    max-width: 900px;
+}
+.collection-intro-text p a {
+    color: var(--accent-antique-gold);
+    text-decoration: none;
+    font-weight: 500;
+}
+.collection-intro-text p a:hover {
+    text-decoration: underline;
+}
+
+.collection-filters-placeholder {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-end; /* Align items to bottom if heights differ */
+    padding: 25px;
+    background-color: #FDFBF7; /* Slightly off-white */
+    border-radius: 8px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+.filter-group label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.filter-select {
+    padding: 12px 18px;
+    border: 1px solid var(--accent-burnished-silver);
+    background-color: #fff;
+    color: var(--text-dark);
+    border-radius: 6px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    min-width: 200px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.filter-select:focus {
+    outline: none;
+    border-color: var(--accent-antique-gold);
+    box-shadow: 0 0 0 2px rgba(200, 168, 118, 0.3);
+}
+
+.filter-apply-btn {
+    padding: 12px 30px;
+    background-color: var(--accent-antique-gold);
+    color: var(--primary-deep-charcoal);
+    border: none;
+    border-radius: 6px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.filter-apply-btn:hover {
+    background-color: #D4AF7B;
+    transform: translateY(-2px);
+}
+
+
+/* --- PRODUCT GRID SECTION --- */
+.section-light-alt {
+    background-color: #F5F2ED; /* Slightly different light shade for the section background */
+}
+
+#product-grid-display .section-title {
+    margin-bottom: 50px;
+    color: var(--text-dark);
+}
+
+.products-grid-placeholder {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 35px; /* Increased gap slightly */
+    margin-bottom: 50px;
+}
+
+/* --- STYLES FOR DYNAMICALLY LOADED PRODUCT CARDS --- */
+
+.watch-display-card-link {
+    text-decoration: none; /* Crucial to remove underlines from child text elements */
+    color: inherit;
+    display: block; /* Makes the link behave like a block container */
+    border-radius: 12px; /* More pronounced rounding */
+    overflow: hidden; /* Ensures content respects border-radius */
+    background-color: var(--secondary-light-ivory, #F9F6F2); /* Card background on link itself */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.07); /* Softer initial shadow */
+    transition: box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.watch-display-card-link:hover {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1), 0 3px 10px rgba(0,0,0,0.06); /* Enhanced shadow on hover */
+    transform: translateY(-8px); /* Lift effect */
+}
+
+.watch-display-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensures cards in a row can align if details have varying heights */
+    /* background-color, border-radius, box-shadow, overflow are handled by .watch-display-card-link now */
+}
+
+.watch-card-image-wrapper {
+    height: 280px; /* Increased image height */
+    overflow: hidden; /* Clip the image if it's larger than the wrapper */
+    position: relative; /* For potential future overlays */
+    background-color: #E0E0E0; /* Fallback background for image area */
+}
+
+.watch-card-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image covers the area, might crop but no distortion */
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother zoom */
+}
+
+.watch-display-card-link:hover .watch-card-image-wrapper img {
+    transform: scale(1.08); /* Slightly more pronounced zoom on hover */
+}
+
+.watch-card-details {
+    padding: 25px; /* Generous padding for content */
+    flex-grow: 1; /* Allows this section to take available space */
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    background-color: #FFFFFF; /* Crisp white background for the details section */
+    border-top: 1px solid #F0F0F0; /* Subtle separator if image and details bg are different */
+}
+
+.watch-card-brand {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.85rem;
+    color: var(--accent-antique-gold, #BE9A6A);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px; /* More spacing for brand */
+    margin-bottom: 8px;
+    display: block;
+}
+
+.watch-card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem; /* Larger, more prominent name */
+    color: var(--text-dark, #333333);
+    margin-bottom: 12px;
+    line-height: 1.25; /* Adjusted for larger font size */
+    font-weight: 700;
+}
+
+.watch-card-desc {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    color: #666666; /* Softer color for description text */
+    line-height: 1.7;
+    margin-bottom: 20px; /* More space before the price */
+    flex-grow: 1; /* Pushes price to the bottom if content is short */
+}
+
+.watch-card-price {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem; /* Larger price */
+    font-weight: 700;
+    color: var(--primary-deep-charcoal, #1E2125);
+    margin-top: auto; /* Ensures price is at the bottom */
+    padding-top: 15px; /* Space above the price */
+    border-top: 1px solid #EEEEEE; /* Subtle separator line above price */
+    text-align: right; /* Align price to the right */
+}
+
+
+/* Fallback styles for product card placeholders (if needed, or remove if not used) */
+.product-card-placeholder {
+    background-color: var(--secondary-light-ivory);
+    border-radius: 10px;
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo);
+}
+/* ... other placeholder styles from your original file ... */
+
+
+.collection-message {
+    text-align: center;
+    margin-top: 40px;
+    padding: 25px;
+    background-color: var(--secondary-light-ivory);
+    border-radius: 8px;
+    border: 1px dashed var(--accent-antique-gold);
+}
+.collection-message p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-dark);
+}
+.collection-message a {
+    color: var(--accent-antique-gold);
+    font-weight: 600;
+    text-decoration: none;
+}
+.collection-message a:hover {
+    text-decoration: underline;
+}
+
+/* --- COLLECTION ETHOS SECTION --- */
+.ethos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 35px;
+    margin-top: 30px;
+}
+
+.ethos-item {
+    background: rgba(30,33,37,0.6);
+    backdrop-filter: blur(8px);
+    color: var(--text-light);
+    padding: 40px 35px;
+    border-radius: 10px;
+    border: 1px solid rgba(190,154,106,0.2);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo), background-color 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.ethos-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.15);
+    background: rgba(40,43,47,0.7);
+}
+.ethos-icon {
+    width: 65px;
+    height: 65px;
+    background-color: var(--accent-antique-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    transition: transform 0.4s var(--ease-out-expo);
+}
+.ethos-icon i {
+    font-size: 1.9rem;
+    color: var(--primary-deep-charcoal);
+}
+.ethos-item:hover .ethos-icon {
+    transform: scale(1.1) rotate(15deg);
+}
+.ethos-item h3 {
+    font-size: 1.7rem;
+    margin-bottom: 15px;
+    color: var(--text-light);
+    line-height: 1.3;
+}
+.ethos-item p {
+    font-size: 1rem;
+    opacity: 0.85;
+    line-height: 1.8;
+    font-weight: 300;
+}
+
+
+/* --- RESPONSIVE ADJUSTMENTS FOR COLLECTION PAGE --- */
+
+@media (max-width: 1024px) {
+    /* .collection-hero-title {
+        font-size: 3.2rem;
+    }
+    .collection-hero-subtitle {
+        font-size: 1.15rem;
+    } */
+    .collection-controls-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .collection-intro-text .section-title-alt {
+        text-align: center;
+    }
+    .collection-intro-text p {
+        text-align: center;
+        max-width: 100%;
+    }
+    .collection-filters-placeholder {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .filter-select, .filter-apply-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    /* #collection-hero {
+        min-height: 55vh;
+        padding-top: calc(var(--header-height) + 20px); 
+    }
+    .collection-hero-title {
+        font-size: 2.8rem;
+    }
+    .collection-hero-subtitle {
+        font-size: 1.05rem;
+    }
+    .hero-cta-collection {
+        padding: 12px 30px;
+        font-size: 0.9rem;
+    } */
+
+    .collection-intro-text .section-title-alt {
+        font-size: 1.9rem;
+    }
+     .collection-intro-text p {
+        font-size: 1rem;
+    }
+
+    .products-grid-placeholder {
+        grid-template-columns: 1fr; /* Single column for smaller screens */
+        gap: 25px;
+    }
+    .watch-card-image-wrapper { /* Adjust image height for smaller cards */
+        height: 240px;
+    }
+    .watch-card-name { /* Adjust name size */
+        font-size: 1.5rem;
+    }
+    .watch-card-price { /* Adjust price size */
+        font-size: 1.3rem;
+    }
+
+
+    .ethos-grid {
+        grid-template-columns: 1fr;
+    }
+    .ethos-item {
+        padding: 30px 25px;
+    }
+    .ethos-item h3 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+   /*  #collection-hero {
+        min-height: 50vh;
+    }
+    .collection-hero-title {
+        font-size: 2.2rem;
+    }
+    .collection-hero-subtitle {
+        font-size: 0.95rem;
+    } */
+    #collection-intro-filters {
+        padding-top: 60px;
+        padding-bottom: 40px;
+    }
+    .collection-intro-text .section-title-alt {
+        font-size: 1.7rem;
+    }
+    #product-grid-display .section-title {
+        font-size: 1.8rem;
+    }
+     .watch-card-name { /* Further adjust name size */
+        font-size: 1.3rem;
+    }
+    .watch-card-desc {
+        font-size: 0.9rem;
+    }
+    .watch-card-price { /* Further adjust price size */
+        font-size: 1.2rem;
+    }
+    .watch-card-image-wrapper { /* Adjust image height for mobile */
+        height: 200px;
+    }
+    .watch-card-details {
+        padding: 20px; /* Reduce padding on smallest screens */
+    }
+
+    .collection-message p {
+        font-size: 1rem;
+    }
+    .ethos-item h3 {
+        font-size: 1.4rem;
+    }
+    .ethos-item p {
+        font-size: 0.95rem;
+    }
+}

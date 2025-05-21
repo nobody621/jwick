@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JWICK.LP | The Art of Time - Exquisite Vintage Horology</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="css/styles.css">
+      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-circle"></div>
+    </div>
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <img src="logo.png" alt="JWICK.LP Logo" class="preloader-logo">
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="#hero" class="site-logo-link cursor-hoverable">
+            <img src="logo.png" alt="JWICK.LP Logo" class="site-logo">
+        </a>
+
+        <!-- Desktop Navigation (visible on larger screens) -->
+        <nav class="desktop-navigation" aria-label="Primary navigation">
+            <ul class="desktop-nav-list">
+                <li><a href="#hero" class="desktop-nav-link cursor-hoverable">Home</a></li>
+                <li><a href="about.html" class="desktop-nav-link cursor-hoverable">About</a></li>
+                <li><a href="collection.html" class="desktop-nav-link cursor-hoverable">Collection</a></li>
+                <li><a href="contact.html" class="desktop-nav-link cursor-hoverable">Contact Us</a></li>
+                <li><a href="#faq" class="desktop-nav-link cursor-hoverable">FAQ</a></li>
+                
+            </ul>
+        </nav>
+
+        <button class="nav-toggle cursor-hoverable" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-navigation-overlay">
+            <span class="nav-toggle-bar top"></span>
+            <span class="nav-toggle-bar middle"></span>
+            <span class="nav-toggle-bar bottom"></span>
+        </button>
+
+        <!-- Mobile/Overlay Navigation -->
+        <!-- Mobile/Overlay Navigation -->
+<div class="main-navigation-overlay" id="mobile-navigation-overlay">
+    <nav aria-label="Mobile navigation menu">
+        <ul class="main-nav-list">
+            <li><a href="#hero" class="main-nav-link cursor-hoverable"><span>H</span><span>o</span><span>m</span><span>e</span></a></li>
+            <li><a href="about.html" class="main-nav-link cursor-hoverable"><span>A</span><span>b</span><span>o</span><span>u</span><span>t</span></a></li> {/* CORRECTED */}
+            <li><a href="#why-choose-us" class="main-nav-link cursor-hoverable"><span>W</span><span>h</span><span>y</span><span> </span><span>U</span><span>s</span></a></li>
+            <li><a href="collection.html" class="main-nav-link cursor-hoverable"><span>C</span><span>o</span><span>l</span><span>l</span><span>e</span><span>c</span><span>t</span><span>i</span><span>o</span><span>n</span></a></li>
+            <li><a href="#testimonials" class="main-nav-link cursor-hoverable"><span>T</span><span>e</span><span>s</span><span>t</span><span>i</span><span>m</span><span>o</span><span>n</span><span>i</span><span>a</span><span>l</span><span>s</span></a></li>
+            <li><a href="#faq" class="main-nav-link cursor-hoverable"><span>F</span><span>A</span><span>Q</span></a></li>
+        </ul>
+    </nav>
+</div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero">
+            <canvas id="hero-background-canvas"></canvas>
+            <div class="hero-watch-showcase">
+                <!-- Replace watch-hero-*.png with your transparent watch images -->
+                <div class="hero-watch hero-watch-1 cursor-hoverable" data-final-rotate="-10deg" data-final-translate-x="15vw" data-final-translate-y="20vh"><img src="watch-hero-1.png" alt="Featured Watch 1"></div>
+                <div class="hero-watch hero-watch-2 cursor-hoverable" data-final-rotate="8deg" data-final-translate-x="65vw" data-final-translate-y="18vh"><img src="watch-hero-2.png" alt="Featured Watch 2"></div>
+                <div class="hero-watch hero-watch-3 cursor-hoverable" data-final-rotate="15deg" data-final-translate-x="20vw" data-final-translate-y="60vh"><img src="watch-hero-3.png" alt="Featured Watch 3"></div>
+               
+            </div>
+            <div class="hero-content-wrapper">
+                <div class="hero-logo-container"><img src="logo.png" alt="JWICK.LP Logo"></div>
+                <h1 class="hero-title"></h1> <!-- Text set by JS: The Art of Time -->
+                <p class="hero-subtitle">Experience the legacy of meticulously restored vintage timepieces. Unique. Authentic. Timeless.</p>
+                <a href="#collection" class="hero-cta cursor-hoverable">Explore The Collection</a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section section-light">
+            <div class="container">
+                <div class="about-grid-layout">
+                    <div class="about-image-wrapper-enhanced animated-item type-slide-left">
+                        <!-- IMAGE: about-main-editorial.jpg -->
+                        <img src="about-showcase-1.jpg" alt="Timeless Elegance Embodied" class="about-image-main">
+                         <!-- IMAGE: about-koi-accent.png -->
+                        <img src="about-koi-accent.png" alt="" class="about-image-accent">
+                    </div>
+                    <div class="about-text-content animated-item type-slide-right" style="transition-delay: 0.2s;">
+                        <h2 class="section-title">Curated Luxury, Authenticity Redefined</h2>
+                        <p class="intro-paragraph">
+                            We offer a curated selection of authentic pre-owned luxury products, meticulously verified for quality and authenticity. Luxury, redefined.
+                        </p>
+                        <p class="highlight-quote">
+                            "Discover our exclusive collection of vintage Japanese watches — fully reconditioned for modern reliability, with all the charm and character collectors love. Own a piece of time you won’t find anywhere else!"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section id="why-choose-us" class="section section-dark">
+            <div class="container">
+                <h2 class="section-title animated-item type-slide-up">The JWICK.LP Difference</h2>
+                <p class="section-subtitle animated-item type-slide-up" style="transition-delay: 0.15s;">Authentic Vintage Watches. Handpicked by Collectors. Guaranteed.</p>
+                <div class="features-immersive-grid" data-stagger-children="150"> <!-- Added data attribute for JS stagger -->
+                    <div class="feature-immersive-card animated-item type-scale-up">
+                        <div class="feature-icon-box"><i class="fas fa-medal"></i></div>
+                        <h3>Expertly Reconditioned</h3>
+                        <p>Vintage Japanese Timepieces, ensuring modern reliability while preserving classic charm.</p>
+                        <div class="tags"><span>Authentic</span> <span>Reliable</span> <span>Collectible</span></div>
+                    </div>
+                    <div class="feature-immersive-card animated-item type-scale-up">
+                        <div class="feature-icon-box"><i class="fas fa-gem"></i></div>
+                        <h3>Rare Finds, Fair Prices</h3>
+                        <p>Discover rare Japanese watches without the premium price tag. Exceptional value for discerning collectors.</p>
+                         <div class="tags"><span>Authentic</span> <span>Reconditioned</span> <span>Value</span></div>
+                    </div>
+                    <div class="feature-immersive-card animated-item type-scale-up">
+                        <div class="feature-icon-box"><i class="fas fa-award"></i></div>
+                        <h3>Collector-Curated & Priced Right</h3>
+                        <p>Each piece is handpicked by experienced collectors and meticulously priced for its quality and rarity.</p>
+                         <div class="tags"><span>Curated</span> <span>Priced Right</span> <span>Guaranteed</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Collection Section -->
+        <section id="collection" class="section section-light">
+             <div class="container">
+                <h2 class="section-title animated-item type-slide-up">Discover Your Timepiece</h2>
+                <p class="section-subtitle animated-item type-slide-up" style="transition-delay: 0.1s;">Explore our handpicked collection of Seiko, Citizen, and Swiss vintage watches.</p>
+                <div class="collection-filters animated-item type-slide-up" style="transition-delay: 0.2s;">
+                    <button class="filter-btn active cursor-hoverable" data-filter="all">All</button>
+                    <button class="filter-btn cursor-hoverable" data-filter="seiko">Seiko</button>
+                    <button class="filter-btn cursor-hoverable" data-filter="citizen">Citizen</button>
+                    <button class="filter-btn cursor-hoverable" data-filter="swiss">Swiss</button>
+                </div>
+                <div class="watches-gallery" data-stagger-children="100">
+                     <!-- Add .animated-item and animation types (e.g., type-scale-up) to each card -->
+                    <div class="watch-display-card animated-item type-scale-up">
+                        <div class="watch-card-image-wrapper"><img src="seiko-king2.webp" alt="Vintage Seiko King"></div>
+                        <div class="watch-card-details"> <p class="watch-card-brand">Seiko</p> <h3 class="watch-card-name">King Seiko Chronometer</h3> <p class="watch-card-desc">A beautifully preserved example from the late 1960s, featuring the iconic KS medallion.</p> <p class="watch-card-price">$850.00</p> </div>
+                    </div>
+                     <div class="watch-display-card animated-item type-scale-up">
+                         <div class="watch-card-image-wrapper"><img src="citizen-diver.jpg" alt="Vintage Citizen Diver"></div>
+                        <div class="watch-card-details"> <p class="watch-card-brand">Citizen</p> <h3 class="watch-card-name">Challenge Diver 150m</h3> <p class="watch-card-desc">Robust vintage diver with a distinctive patina and original bracelet.</p> <p class="watch-card-price">$520.00</p> </div>
+                    </div>
+                    <div class="watch-display-card animated-item type-scale-up">
+                         <div class="watch-card-image-wrapper"><img src="watch-product-3.webp" alt="Vintage Swiss Watch Example"></div>
+                        <div class="watch-card-details"> <p class="watch-card-brand">Swiss Vintage</p> <h3 class="watch-card-name">Elegant Dress Watch</h3> <p class="watch-card-desc">Classic design, perfect for formal occasions. Manual wind movement.</p> <p class="watch-card-price">$410.00</p> </div>
+                    </div>
+                    <!-- Add more watch cards here, each with .animated-item and type-* class -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="section section-light">
+            <div class="container">
+                <h2 class="section-title animated-item type-slide-up">Hear From Our Collectors</h2>
+                <div class="testimonial-slider-wrapper animated-item type-slide-up" style="transition-delay: 0.1s;">
+                    <div class="testimonial-slide active">
+                        <!-- IMAGE: testimonial-author-1.jpg -->
+                        <img src="testimonial-author-1.jpg" alt="Alex Chen" class="testimonial-author-img">
+                        <p class="testimonial-text">"The Seiko I received was even more stunning in person. JWICK.LP's reconditioning work is flawless. A true masterpiece for my collection."</p>
+                        <p class="testimonial-author-name">Alex Chen</p>
+                    </div>
+                    <div class="testimonial-slide">
+                        <!-- IMAGE: testimonial-author-2.jpg -->
+                        <img src="testimonial-author-2.jpeg" alt="Maria Gomez" class="testimonial-author-img">
+                        <p class="testimonial-text">"Finding a reliable source for vintage Japanese watches was tough until I found JWICK.LP. Authenticity guaranteed, and fantastic customer service!"</p>
+                        <p class="testimonial-author-name">Maria Gomez</p>
+                    </div>
+                </div>
+                <div class="testimonial-nav animated-item type-slide-up" style="transition-delay: 0.2s;">
+                    <button class="prev-testimonial cursor-hoverable"><i class="fas fa-chevron-left"></i></button>
+                    <button class="next-testimonial cursor-hoverable"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="section section-dark">
+            <div class="container" style="max-width: 850px;"> <!-- Slightly wider FAQ container -->
+                <h2 class="section-title animated-item type-slide-up">Frequently Asked Questions</h2>
+                <div data-stagger-children="100"> <!-- Stagger FAQ items -->
+                    <div class="faq-item animated-item type-slide-up">
+                        <div class="faq-question cursor-hoverable"><span>What does 'fully reconditioned' mean?</span> <i class="fas fa-plus faq-icon"></i></div>
+                        <div class="faq-answer"><p>Our reconditioning involves a complete service: movement disassembly, cleaning, oiling, calibration, replacement of worn parts with authentic or high-quality equivalents, and case/bracelet restoration to preserve character.</p></div>
+                    </div>
+                    <div class="faq-item animated-item type-slide-up">
+                        <div class="faq-question cursor-hoverable"><span>Are all your watches authentic?</span> <i class="fas fa-plus faq-icon"></i></div>
+                        <div class="faq-answer"><p>Yes. Authenticity is paramount. Every watch is meticulously verified by our experts before being offered for sale. We stand by our guarantee.</p></div>
+                    </div>
+                     <div class="faq-item animated-item type-slide-up">
+                        <div class="faq-question cursor-hoverable"><span>Do you ship internationally?</span> <i class="fas fa-plus faq-icon"></i></div>
+                        <div class="faq-answer"><p>Yes, we offer secure international shipping. Shipping costs and times vary by destination. Please contact us for specific inquiries.</p></div>
+                    </div>
+                     <div class="faq-item animated-item type-slide-up">
+                        <div class="faq-question cursor-hoverable"><span>What is your warranty policy?</span> <i class="fas fa-plus faq-icon"></i></div>
+                        <div class="faq-answer"><p>We offer a 12-month mechanical warranty on all our reconditioned timepieces covering the movement against defects under normal use conditions.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid-layout" data-stagger-children="100">
+                <div class="footer-column footer-logo-section animated-item type-slide-up">
+                    <a href="#hero" class="site-logo-link cursor-hoverable"><img src="logo.png" alt="JWICK.LP Logo" class="site-logo"></a>
+                    <p class="footer-tagline">Exquisite Vintage Horology. Authenticity. Craftsmanship. Legacy.</p>
+                    <div class="footer-social-links">
+                        <a href="#" aria-label="Instagram" class="cursor-hoverable"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook" class="cursor-hoverable"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Pinterest" class="cursor-hoverable"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column animated-item type-slide-up">
+                    <h3 class="footer-column-title">Explore</h3>
+                    <ul class="footer-nav-list">
+                        <li><a href="#about" class="cursor-hoverable">Our Story</a></li>
+                        <li><a href="#why-choose-us" class="cursor-hoverable">Our Promise</a></li>
+                        <li><a href="#collection" class="cursor-hoverable">The Collection</a></li>
+                        <li><a href="#faq" class="cursor-hoverable">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column animated-item type-slide-up">
+                    <h3 class="footer-column-title">Support</h3>
+                    <ul class="footer-nav-list">
+                        <li><a href="#contact" class="cursor-hoverable">Contact Us</a></li>
+                        <li><a href="#" class="cursor-hoverable">Shipping & Returns</a></li>
+                        <li><a href="#" class="cursor-hoverable">Warranty Information</a></li>
+                        <li><a href="#" class="cursor-hoverable">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column footer-contact-info animated-item type-slide-up">
+                    <h3 class="footer-column-title">Get In Touch</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 75/1A/12, Church Road,<br>Indigolla, Gampaha, Sri Lanka.</p>
+                    <p><i class="fas fa-phone-alt"></i> <a href="tel:+94XXXXXXXXX" class="cursor-hoverable" style="color: inherit; text-decoration: none;">+94 70 187 6387</a></p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:info@jwick.lp" class="cursor-hoverable" style="color: inherit; text-decoration: none;">admin@jwicklp.com</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom-bar animated-item type-slide-up" >
+                <p>© <span id="currentYear"></span> JWICK.LP. All Rights Reserved. Designed with Passion.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Link to external JS file -->
+    <script src="js/script.js"></script>
+</body>
+</html>

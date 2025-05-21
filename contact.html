@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | JWICK.LP - Exquisite Vintage Horology</title>
+    <!-- Link to existing main CSS file -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Link to new CSS file for this contact page -->
+    <link rel="stylesheet" href="css/contact.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+    <!-- Custom Cursor (from original theme) -->
+    <div class="custom-cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-circle"></div>
+    </div>
+
+    <!-- Preloader (from original theme) -->
+    <div class="preloader">
+        <img src="logo.png" alt="JWICK.LP Logo" class="preloader-logo">
+    </div>
+
+    <!-- Header (Copied from other pages, ensure "Contact Us" can be an active link if desired) -->
+    <header class="header">
+        <a href="index.html" class="site-logo-link cursor-hoverable">
+            <img src="logo.png" alt="JWICK.LP Logo" class="site-logo">
+        </a>
+        <nav class="desktop-navigation" aria-label="Primary navigation">
+            <ul class="desktop-nav-list">
+                <li><a href="index.html" class="desktop-nav-link cursor-hoverable">Home</a></li>
+                <li><a href="about.html" class="desktop-nav-link cursor-hoverable">About</a></li>
+                <li><a href="collection.html" class="desktop-nav-link cursor-hoverable">Collection</a></li>
+                <li><a href="contact.html" class="desktop-nav-link cursor-hoverable active">Contact Us</a></li> <!-- Active link -->
+                <li><a href="index.html#faq" class="desktop-nav-link cursor-hoverable">FAQ</a></li>
+            </ul>
+        </nav>
+        <button class="nav-toggle cursor-hoverable" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-navigation-overlay">
+            <span class="nav-toggle-bar top"></span>
+            <span class="nav-toggle-bar middle"></span>
+            <span class="nav-toggle-bar bottom"></span>
+        </button>
+        <div class="main-navigation-overlay" id="mobile-navigation-overlay">
+            <nav aria-label="Mobile navigation menu">
+                <ul class="main-nav-list">
+                    <li><a href="index.html" class="main-nav-link cursor-hoverable"><span>H</span><span>o</span><span>m</span><span>e</span></a></li>
+                    <li><a href="about.html" class="main-nav-link cursor-hoverable"><span>A</span><span>b</span><span>o</span><span>u</span><span>t</span></a></li>
+                    <li><a href="collection.html" class="main-nav-link cursor-hoverable"><span>C</span><span>o</span><span>l</span><span>l</span><span>e</span><span>c</span><span>t</span><span>i</span><span>o</span><span>n</span></a></li>
+                    <li><a href="contact.html" class="main-nav-link cursor-hoverable active-mobile-link"><span>C</span><span>o</span><span>n</span><span>t</span><span>a</span><span>c</span><span>t</span></a></li>
+                    <li><a href="index.html#faq" class="main-nav-link cursor-hoverable"><span>F</span><span>A</span><span>Q</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="contact-page-main">
+        <!-- Contact Hero Section -->
+        <section id="contact-hero" class="section section-dark">
+            <!-- The background image for this hero will be set in contact.css -->
+            <div class="contact-hero-overlay"></div> <!-- For darkening the background image -->
+            <div class="container animated-item type-fade-in" style="animation-delay: 0.3s;">
+                <h1 class="contact-hero-title">Connect With Us</h1>
+                <p class="contact-hero-subtitle">Your inquiries are important to us. Whether you have questions about our collection, wish to schedule a viewing, or require expert advice, our team is ready to assist you with passion and precision.</p>
+            </div>
+        </section>
+
+        <!-- Contact Form & Details Section -->
+        <section id="contact-form-details-section" class="section section-light-alt"> <!-- Using a slightly different light bg -->
+            <div class="container">
+                <div class="contact-section-intro animated-item type-slide-up">
+                    <h2 class="section-title">We're Here to Listen</h2>
+                    <p class="section-intro-p">Please use the form below for general inquiries or reach out to us directly through our provided contact channels. For specific timepiece questions, kindly mention the model or reference if possible.</p>
+                </div>
+
+                <div class="contact-grid-layout">
+                    <!-- Left Column: Contact Form -->
+                    <div class="contact-form-wrapper animated-item type-slide-in-left" data-animation-delay="0.2s">
+                        <h3 class="contact-form-title">Send a Direct Message</h3>
+                        <form id="contactForm" action="YOUR_FORM_SUBMISSION_ENDPOINT" method="POST">
+                            <!-- Replace YOUR_FORM_SUBMISSION_ENDPOINT with your actual backend or a service like Formspree -->
+                            <div class="form-group">
+                                <label for="contact-name">Full Name</label>
+                                <input type="text" id="contact-name" name="name" placeholder="e.g., John Doe" required class="form-input cursor-hoverable">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email">Email Address</label>
+                                <input type="email" id="contact-email" name="email" placeholder="e.g., john.doe@example.com" required class="form-input cursor-hoverable">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-subject">Subject</label>
+                                <input type="text" id="contact-subject" name="subject" placeholder="e.g., Inquiry about a Vintage Omega" required class="form-input cursor-hoverable">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-message">Your Message</label>
+                                <textarea id="contact-message" name="message" rows="7" placeholder="Please type your message here..." required class="form-textarea cursor-hoverable"></textarea>
+                            </div>
+                            <div class="form-group form-submit-group">
+                                <button type="submit" class="cta-button cta-button-primary cursor-hoverable" style="width: 100%;">
+                                    <i class="fas fa-paper-plane"></i> Send Message
+                                </button>
+                            </div>
+                        </form>
+                        <div id="form-status-message" class="form-status"></div> <!-- For AJAX success/error messages -->
+                    </div>
+
+                    <!-- Right Column: Contact Info & Map -->
+                    <div class="contact-info-map-wrapper animated-item type-slide-in-right" data-animation-delay="0.4s">
+                        <div class="contact-info-block">
+                            <h3 class="contact-info-title">Our Contact Channels</h3>
+                            <div class="info-item">
+                                <i class="info-icon fas fa-map-marker-alt"></i>
+                                <div class="info-content">
+                                    <h4>Visit Our Showroom (By Appointment)</h4>
+                                    <p>75/1A/12, Church Road,<br>Indigolla, Gampaha, Sri Lanka.</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="info-icon fas fa-phone-alt"></i>
+                                <div class="info-content">
+                                    <h4>Speak to an Expert</h4>
+                                    <p><a href="tel:+94XXXXXXXXX" class="cursor-hoverable">+94 (XXX) XXX-XXXX</a></p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="info-icon fas fa-envelope"></i>
+                                <div class="info-content">
+                                    <h4>Email Us</h4>
+                                    <p><a href="mailto:info@jwick.lp" class="cursor-hoverable">info@jwick.lp</a></p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="info-icon fas fa-clock"></i>
+                                <div class="info-content">
+                                    <h4>Business Hours</h4>
+                                    <p>Mon - Fri: 9:00 AM - 6:00 PM (SLST)</p>
+                                    <p>Saturday: 10:00 AM - 4:00 PM (By Appointment)</p>
+                                    <p>Sunday & Public Holidays: Closed</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="map-block">
+                            <h3 class="map-title">Our Location</h3>
+                            <!-- Replace this div with your actual Google Maps embed code -->
+                            <div class="map-embed-container">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.969797579511!2d79.9960113152678!3d7.012370994934837!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2fc2322670923%3A0x63728b24757ea635!2sIndigolla%2C%20Gampaha!5e0!3m2!1sen!2slk!4v1678888888888!5m2!1sen!2slk" 
+                                width="100%" height="350" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Our Location Map"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (Copied from other pages) -->
+    <footer class="footer" id="footer-contact-info">
+        <div class="container">
+            <div class="footer-grid-layout" data-stagger-children="100">
+                <div class="footer-column footer-logo-section animated-item type-slide-up">
+                    <a href="index.html" class="site-logo-link cursor-hoverable"><img src="logo.png" alt="JWICK.LP Logo" class="site-logo"></a>
+                    <p class="footer-tagline">Exquisite Vintage Horology. Authenticity. Craftsmanship. Legacy.</p>
+                    <div class="footer-social-links">
+                        <a href="#" aria-label="Instagram" class="cursor-hoverable"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook" class="cursor-hoverable"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Pinterest" class="cursor-hoverable"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column animated-item type-slide-up" style="transition-delay: 0.1s;">
+                    <h3 class="footer-column-title">Explore</h3>
+                    <ul class="footer-nav-list">
+                        <li><a href="about.html" class="cursor-hoverable">Our Story</a></li>
+                        <li><a href="index.html#why-choose-us" class="cursor-hoverable">Our Promise</a></li>
+                        <li><a href="collection.html" class="cursor-hoverable">The Collection</a></li>
+                        <li><a href="index.html#faq" class="cursor-hoverable">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column animated-item type-slide-up" style="transition-delay: 0.2s;">
+                    <h3 class="footer-column-title">Support</h3>
+                    <ul class="footer-nav-list">
+                        <li><a href="contact.html" class="cursor-hoverable">Contact Us</a></li>
+                        <li><a href="#" class="cursor-hoverable">Shipping & Returns</a></li>
+                        <li><a href="#" class="cursor-hoverable">Warranty Information</a></li>
+                        <li><a href="#" class="cursor-hoverable">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column footer-contact-info animated-item type-slide-up" style="transition-delay: 0.3s;">
+                    <h3 class="footer-column-title">Get In Touch</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 75/1A/12, Church Road,<br>Indigolla, Gampaha, Sri Lanka.</p>
+                    <p><i class="fas fa-phone-alt"></i> <a href="tel:+94XXXXXXXXX" class="cursor-hoverable" style="color: inherit; text-decoration: none;">+94 70 187 6387</a></p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:info@jwick.lp" class="cursor-hoverable" style="color: inherit; text-decoration: none;">admin@jwicklp.com</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom-bar animated-item type-slide-up" style="transition-delay: 0.4s;">
+                <p>© <span id="currentYear"></span> JWICK.LP. All Rights Reserved. Designed with Passion.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <!-- Optional: <script src="js/contact-form.js"></script> for AJAX form handling -->
+</body>
+</html>

@@ -1,0 +1,461 @@
+/* css/styles.css */
+
+/* --- FONT & ROOT VARIABLES --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Outfit:wght@200;300;400;500;600;700&display=swap');
+
+:root {
+    --primary-deep-charcoal: #101214;
+    --secondary-light-ivory: #F9F7F3;
+    --accent-antique-gold: #C8A876;
+    --accent-burnished-silver: #A8AEB3;
+    --text-light: #F0EDE8;
+    --text-dark: #25282C;
+    --text-dark-muted: #555555; /* Added for general muted text */
+    --surface-dark-accent: #181B1F;
+    --surface-light: #F9F9F7; /* Added for contact page */
+    --surface-ultralight: #FDFDFD; /* Added for contact form inputs */
+    --border-light: #EAEAEA; /* Added for contact page elements */
+    --border-medium: #D0D0D0; /* Added for contact form inputs */
+    --accent-antique-gold-translucent: rgba(190,154,106,0.1); /* For outlines/hovers */
+    --accent-antique-gold-darker: #a8875f; /* For link hovers */
+    --shadow-soft: 0 8px 25px rgba(16, 18, 20, 0.07);
+    --shadow-medium: 0 12px 35px rgba(16, 18, 20, 0.1);
+    --shadow-strong: 0 18px 50px rgba(16, 18, 20, 0.15);
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out-circ: cubic-bezier(0.85, 0, 0.15, 1);
+    --transition-main: all 0.8s var(--ease-out-expo);
+    --transition-fast: all 0.5s var(--ease-out-expo);
+    --header-height: 130px;
+    --header-height-scrolled: 96px;
+}
+
+/* --- BASE & RESET --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-dark);
+    background-color: var(--primary-deep-charcoal);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.7;
+    padding-top: var(--header-height);
+}
+body.nav-open-no-scroll { overflow: hidden; }
+
+/* --- CUSTOM CURSOR --- */
+.custom-cursor { position: fixed; left: 0; top: 0; pointer-events: none; z-index: 99999; opacity: 0; transition: opacity 0.3s ease; }
+.cursor-circle { width: 28px; height: 28px; border: 1px solid var(--accent-antique-gold); border-radius: 50%; position: absolute; transform: translate(-50%, -50%); transition: width 0.3s var(--ease-out-expo), height 0.3s var(--ease-out-expo), background-color 0.3s var(--ease-out-expo), opacity 0.3s var(--ease-out-expo), transform 0.07s linear; }
+.cursor-dot { width: 6px; height: 6px; background-color: var(--accent-antique-gold); border-radius: 50%; position: absolute; transform: translate(-50%, -50%); transition: transform 0.1s linear; }
+body:hover .custom-cursor { opacity: 1; }
+body .cursor-hoverable:hover ~ .custom-cursor .cursor-circle { width: 40px; height: 40px; opacity: 0.4; background-color: rgba(200,168,118,0.1); }
+body .cursor-hoverable:hover ~ .custom-cursor .cursor-dot { transform: translate(-50%, -50%) scale(0); }
+
+/* --- LAYOUT & TYPOGRAPHY --- */
+.container { width: 90%; max-width: 1280px; margin: 0 auto; }
+.section { padding: 120px 0; overflow: hidden; position: relative; }
+.section-light { background-color: var(--secondary-light-ivory); }
+.section-dark { background-color: var(--primary-deep-charcoal); color: var(--text-light); }
+.section-light-alt { background-color: var(--surface-light, #F5F2ED); } /* For collection page sections */
+
+h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 700; }
+.section-dark h1, .section-dark h2, .section-dark h3, .section-dark h4 { color: var(--text-light); }
+.section .section-title { font-size: 3.2rem; text-align: center; margin-bottom: 30px; color: var(--accent-antique-gold); letter-spacing: 0.5px; line-height: 1.25; }
+.section-light .section-title { color: var(--accent-antique-gold); }
+.section .section-subtitle { font-family: 'Outfit', sans-serif; font-size: 1.2rem; text-align: center; max-width: 800px; margin: 0 auto 70px auto; font-weight: 300; opacity: 0.9; line-height: 1.8; }
+.section-dark .section-subtitle { color: var(--text-light); opacity: 0.8; }
+
+/* --- ANIMATIONS --- */
+.animated-item { opacity: 0; will-change: transform, opacity; transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo); }
+.animated-item.type-slide-up { transform: translateY(70px); }
+.animated-item.type-slide-left { transform: translateX(70px) rotate(-3deg); }
+.animated-item.type-slide-right { transform: translateX(-70px) rotate(3deg); }
+.animated-item.type-scale-up { transform: scale(0.9); }
+.animated-item.type-fade-in { transform: translateY(0); } /* For items that just fade */
+.animated-item.is-visible { opacity: 1; transform: translateY(0) translateX(0) rotate(0deg) scale(1); }
+
+/* --- PRELOADER --- */
+.preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--primary-deep-charcoal); display: flex; justify-content: center; align-items: center; z-index: 10000; transition: opacity 1s var(--ease-in-out-circ), visibility 1s var(--ease-in-out-circ); }
+.preloader.loaded { opacity: 0; visibility: hidden; }
+.preloader-logo { width: 120px; height: auto; animation: preloaderKoi 2.5s ease-in-out infinite; }
+@keyframes preloaderKoi { 0%, 100% { transform: scale(1) rotate(-5deg); opacity: 0.8; } 50% { transform: scale(1.15) rotate(5deg); opacity: 1; } }
+
+/* --- HEADER & NAVIGATION --- */
+.header { position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height); padding: 0 20px; display: flex; justify-content: space-between; align-items: center; background-color: transparent; z-index: 1000; transition: height 0.5s var(--ease-out-expo), background-color 0.5s var(--ease-out-expo), box-shadow 0.5s var(--ease-out-expo), padding 0.5s var(--ease-out-expo); }
+.header.scrolled { height: var(--header-height-scrolled); background-color: var(--primary-deep-charcoal); box-shadow: 0 6px 35px rgba(0,0,0,0.15); }
+.header::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background-color: var(--accent-antique-gold); transform: scaleX(0); transform-origin: center; transition: transform 0.5s var(--ease-out-expo); opacity: 0.5; }
+.header.scrolled::after { transform: scaleX(1); }
+.site-logo-link { display: flex; align-items: center; height: 100%; }
+.site-logo { height: 100px; width: auto; transition: height 0.4s var(--ease-out-expo), filter 0.4s ease, transform 0.3s ease; filter: drop-shadow(0 6px 20px rgba(200,168,118,0.4)); }
+.site-logo:hover { filter: drop-shadow(0 8px 28px rgba(200,168,118,0.5)); transform: scale(1.03); }
+.header.scrolled .site-logo { height: 75px; }
+.desktop-navigation { display: none; flex-grow: 1; justify-content: center; align-items: center; }
+.desktop-nav-list { list-style: none; padding: 0; margin: 0; display: flex; align-items: center; }
+.desktop-nav-list li { margin-left: 35px; }
+.desktop-nav-list li:first-child { margin-left: 0; }
+.desktop-nav-link { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--text-light); text-decoration: none; padding: 5px 0; position: relative; transition: color 0.3s ease, opacity 0.3s ease; opacity: 0.8; }
+.desktop-nav-link:hover, .desktop-nav-link:focus, .desktop-nav-link.active { color: var(--accent-antique-gold); opacity: 1; }
+.desktop-nav-link::after { content: ''; position: absolute; width: 100%; height: 2px; bottom: -2px; left: 0; background-color: var(--accent-antique-gold); transform: scaleX(0); transform-origin: left; transition: transform 0.4s var(--ease-out-expo); }
+.desktop-nav-link:hover::after, .desktop-nav-link:focus::after, .desktop-nav-link.active::after { transform: scaleX(1); }
+.nav-toggle { display: flex; background: none; border: none; padding: 10px; cursor: pointer; z-index: 1002; position: relative; width: 36px; height: 28px; }
+.nav-toggle-bar { display: block; width: 100%; height: 3px; background-color: var(--text-light); position: absolute; left: 0; border-radius: 1px; transition: transform 0.45s var(--ease-in-out-circ), opacity 0.35s ease, background-color 0.35s ease; }
+.nav-toggle-bar.top { top: 0; transform-origin: top left; }
+.nav-toggle-bar.middle { top: 50%; transform: translateY(-50%); }
+.nav-toggle-bar.bottom { bottom: 0; transform-origin: bottom left; }
+.nav-open .nav-toggle-bar.top { transform: rotate(45deg) translate(2px, -2px); width: 115%;}
+.nav-open .nav-toggle-bar.middle { opacity: 0; transform: translateX(-100%); }
+.nav-open .nav-toggle-bar.bottom { transform: rotate(-45deg) translate(2px, 2px); width: 115%; }
+.nav-open .nav-toggle-bar { background-color: var(--accent-antique-gold); }
+.main-navigation-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: var(--primary-deep-charcoal); z-index: 1001; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; clip-path: circle(0% at calc(100% - 45px) 50px); transition: opacity 0.7s var(--ease-in-out-circ), visibility 0s linear 0.7s, clip-path 0.7s var(--ease-in-out-circ); background-image: linear-gradient(rgba(16,18,20,0.97), rgba(16,18,20,1)), url('../images/koi-watermark-faint.png'); /* USER: Ensure path is correct */ background-repeat: no-repeat; background-position: center 110%; background-size: 70% auto; }
+.nav-open .main-navigation-overlay { opacity: 1; visibility: visible; transition-delay: 0s; clip-path: circle(150% at calc(100% - 45px) 50px); }
+.main-nav-list { list-style: none; text-align: center; padding: 0; }
+.main-nav-list li { margin: 20px 0; opacity: 0; transform: translateY(40px) skewY(3deg); transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo); }
+.nav-open .main-nav-list li { opacity: 1; transform: translateY(0) skewY(0deg); }
+.nav-open .main-nav-list li:nth-child(1) { transition-delay: 0.35s; } .nav-open .main-nav-list li:nth-child(2) { transition-delay: 0.41s; } .nav-open .main-nav-list li:nth-child(3) { transition-delay: 0.47s; } .nav-open .main-nav-list li:nth-child(4) { transition-delay: 0.53s; } .nav-open .main-nav-list li:nth-child(5) { transition-delay: 0.59s; } .nav-open .main-nav-list li:nth-child(6) { transition-delay: 0.65s; }
+.main-nav-link { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--text-light); text-decoration: none; font-weight: 600; padding: 15px 20px; display: inline-block; position: relative; transition: color 0.3s ease, transform 0.3s var(--ease-out-expo); }
+.main-nav-link span { display: inline-block; transition: transform 0.3s var(--ease-out-expo); }
+.main-nav-link:hover { color: var(--accent-antique-gold); transform: scale(1.04) skewX(-3deg); }
+.main-nav-link:hover span { transform: translateY(-3px) scaleY(0.9); margin: 0 1.5px; }
+.main-nav-link::before { content: ''; position: absolute; width: 0; height: 3px; bottom: 0; left: 50%; transform: translateX(-50%) scaleX(0.8); background-color: var(--accent-antique-gold); transition: width 0.5s var(--ease-out-expo); opacity: 0.8; }
+.main-nav-link:hover::before { width: 70%; }
+
+/* --- HERO SECTION --- */
+#hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; background-color: var(--primary-deep-charcoal); overflow: hidden; padding-top: calc(var(--header-height) * -1); }
+#hero-background-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+.hero-content-wrapper { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; color: var(--text-light); }
+.hero-logo-container { margin-bottom: 35px; opacity: 0; transform: scale(0.8); animation: heroLogoFadeIn 1.2s ease-out 0.5s forwards; }
+.hero-logo-container img { height: 100px; filter: drop-shadow(0 0 30px rgba(190,154,106,0.6)); }
+@keyframes heroLogoFadeIn { to { opacity: 1; transform: scale(1); } }
+.hero-title { font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 800; line-height: 1.15; margin-bottom: 25px; color: var(--text-light); letter-spacing: 1px; }
+.hero-title .word { display: inline-block; overflow: hidden; margin: 0 0.1em;}
+.hero-title .char { display: inline-block; transform: translateY(120%) skewY(10deg); opacity: 0; transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.6s ease; }
+.hero-subtitle { font-size: 1.35rem; font-weight: 300; margin-bottom: 45px; max-width: 700px; line-height: 1.7; opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease 1s, transform 0.8s ease 1s; }
+.hero-subtitle.visible { opacity: 1; transform: translateY(0); }
+.hero-cta { display: inline-block; padding: 18px 45px; background-color: var(--accent-antique-gold); color: var(--primary-deep-charcoal); font-family: 'Outfit', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; text-decoration: none; border-radius: 50px; transition: background-color 0.3s ease, transform 0.3s var(--ease-out-expo), box-shadow 0.3s ease; opacity: 0; transform: translateY(20px); animation: heroCtaFadeIn 0.8s ease-out 1.5s forwards; box-shadow: 0 5px 20px rgba(190,154,106,0.3); animation-play-state: paused; }
+.hero-cta.cta-visible { animation-play-state: running; }
+.hero-cta:hover { background-color: #D4AF7B; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(190,154,106,0.4); }
+@keyframes heroCtaFadeIn { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+.hero-watch-showcase { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+.hero-watch { position: absolute; opacity: 0; transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo); will-change: transform, opacity; pointer-events: auto; cursor: pointer; }
+.hero-watch img { max-width: 100%; height: auto; display: block; filter: drop-shadow(0px 10px 30px rgba(0,0,0,0.3)); transition: transform 0.5s var(--ease-out-expo); }
+.hero-watch:hover img { transform: scale(1.1); }
+.hero-watch-1 { width: 22%; transform: translate(15vw, 20vh) rotate(-15deg) scale(0.8); }
+.hero-watch-2 { width: 28%; transform: translate(60vw, 15vh) rotate(10deg) scale(0.8); }
+.hero-watch-3 { width: 20%; transform: translate(25vw, 65vh) rotate(20deg) scale(0.8); }
+/* .hero-watch-4 { width: 25%; transform: translate(70vw, 60vh) rotate(-5deg) scale(0.8); } */ /* Removed if not used */
+.hero-watch.is-visible { opacity: 0.6; transform: scale(1) rotate(var(--final-rotate, 0deg)) translate(var(--final-translate-x, 0), var(--final-translate-y, 0)); }
+.hero-watch.is-visible:hover { opacity: 1; z-index: 5; }
+
+/* --- ABOUT SECTION --- */
+#about { background: linear-gradient(135deg, var(--secondary-light-ivory) 0%, #EAE6DE 100%); position: relative; }
+.about-grid-layout { display: grid; grid-template-columns: repeat(12, 1fr); align-items: center; gap: 30px; position: relative; }
+.about-image-wrapper-enhanced { grid-column: 1 / span 6; position: relative; min-height: 550px; }
+.about-image-main { width: 90%; height: 500px; object-fit: cover; border-radius: 8px; box-shadow: var(--shadow-strong); position: absolute; top: 50px; left: 0; transform: rotate(-3deg) scale(1); transition: transform 0.8s var(--ease-out-expo); }
+.about-image-wrapper-enhanced.is-visible .about-image-main { transform: rotate(0deg) scale(1); }
+.about-image-accent { width: 150px; height: auto; position: absolute; bottom: 20px; right: -50px; opacity: 0; z-index: 1; transform: rotate(15deg) scale(0.8); transition: transform 1s var(--ease-out-expo) 0.3s, opacity 1s ease 0.3s; content: url('../images/about-koi-accent.png'); /* USER: Ensure path is correct */ }
+.about-image-wrapper-enhanced.is-visible .about-image-accent { transform: rotate(5deg) scale(1); opacity: 0.15; }
+.about-text-content { grid-column: 7 / span 6; padding-left: 40px; }
+.about-text-content .section-title { text-align: left; font-size: 2.8rem; margin-bottom: 25px; position: relative; }
+.about-text-content .section-title::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 70px; height: 3px; background: var(--accent-antique-gold); }
+.about-text-content .intro-paragraph { font-size: 1.15rem; line-height: 1.9; margin-bottom: 25px; color: var(--text-dark); font-weight: 300;}
+.about-text-content .highlight-quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.35rem; margin-top: 30px; padding: 20px 25px; border-left: 4px solid var(--accent-antique-gold); background-color: rgba(190,154,106,0.05); border-radius: 0 6px 6px 0; color: #40382D; }
+
+/* --- WHY CHOOSE US (FEATURES) SECTION --- */
+#why-choose-us { background-image: linear-gradient(rgba(16, 18, 20,0.97), rgba(16, 18, 20,0.97)), url('../images/dark-textured-bg.jpg'); /* USER: Ensure path is correct */ background-size: auto, cover; background-attachment: local, fixed; }
+.features-immersive-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 35px; margin-top: 30px; }
+.feature-immersive-card { background: rgba(30,33,37,0.5); backdrop-filter: blur(10px); color: var(--text-light); padding: 45px 40px; border-radius: 12px; border: 1px solid rgba(190,154,106,0.25); box-shadow: var(--shadow-medium); transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo), background-color 0.4s ease, border-color 0.4s ease; overflow: hidden; position: relative; display: flex; flex-direction: column; }
+.feature-immersive-card:hover { transform: translateY(-15px) scale(1.03); box-shadow: 0 20px 45px rgba(0,0,0,0.2); background: rgba(40,43,47,0.6); border-color: rgba(190,154,106,0.4); }
+.feature-immersive-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(190,154,106,0.1), transparent); transition: left 0.7s var(--ease-out-expo); }
+.feature-immersive-card:hover::before { left: 100%; }
+.feature-icon-box { width: 60px; height: 60px; background-color: var(--accent-antique-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 30px; transition: transform 0.4s var(--ease-out-expo); }
+.feature-icon-box i { font-size: 1.8rem; color: var(--primary-deep-charcoal); }
+.feature-immersive-card:hover .feature-icon-box { transform: rotateY(360deg) scale(1.1); }
+.feature-immersive-card h3 { font-size: 1.8rem; margin-bottom: 18px; color: var(--text-light); line-height: 1.3; }
+.feature-immersive-card p { font-size: 1.05rem; opacity: 0.8; line-height: 1.8; margin-bottom: auto; font-weight: 300; }
+.feature-immersive-card .tags { margin-top: 25px; }
+.feature-immersive-card .tags span { margin-right: 10px; padding: 6px 14px; background: rgba(190,154,106,0.2); color:var(--accent-antique-gold); border-radius: 20px; font-size: 0.85rem; font-weight:500; display: inline-block; margin-bottom: 6px; border: 1px solid rgba(190,154,106,0.3); }
+
+/* --- GENERAL COLLECTION SECTION (FOR /collection.html, distinct from homepage #collection) --- */
+/* Styles for the main collection page grid (not the homepage horizontal scroll) */
+/* These are EXAMPLE styles - adjust based on collection.css or if you reuse .watch-display-card globally */
+.products-grid-placeholder { /* From collection.css, for the main collection page */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+/* Global .watch-display-card for generic use, if not overridden by specific section */
+.watch-display-card {
+    background-color: var(--secondary-light-ivory);
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo);
+    position: relative;
+}
+.watch-display-card:hover {
+    transform: translateY(-8px); /* Default hover lift */
+    box-shadow: var(--shadow-medium); /* Default hover shadow */
+}
+.watch-card-image-wrapper {
+    height: 320px; /* Default image height */
+    overflow: hidden;
+    position: relative;
+    border-radius: 12px 12px 0 0;
+}
+.watch-card-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s var(--ease-out-expo);
+}
+.watch-display-card:hover .watch-card-image-wrapper img {
+    transform: scale(1.05); /* Default image zoom */
+}
+.watch-card-details {
+    padding: 25px; /* Default padding */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.watch-card-brand { font-size: 0.85rem; color: var(--accent-antique-gold); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+.watch-card-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 10px; color: var(--text-dark); line-height: 1.3; }
+.watch-card-desc { font-size: 0.95rem; color: #555; margin-bottom: 15px; line-height: 1.6; flex-grow: 1; font-weight: 300; }
+.watch-card-price { font-size: 1.3rem; font-weight: 700; color: var(--text-dark); margin-top: auto; }
+
+
+/* --- ENHANCED HOMEPAGE COLLECTION SECTION (ID: #collection on index.html) --- */
+section#collection {
+    padding-top: 100px;
+    padding-bottom: 120px;
+    background-color: var(--secondary-light-ivory);
+}
+section#collection .section-title {
+    margin-bottom: 20px;
+    font-size: 3.5rem;
+}
+section#collection .section-subtitle {
+    margin-bottom: 60px;
+    font-size: 1.3rem;
+}
+section#collection .collection-filters {
+    margin-bottom: 70px;
+    gap: 20px;
+    display: flex; /* Ensure filter buttons are in a row */
+    justify-content: center; /* Center filter buttons */
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+}
+section#collection .filter-btn {
+    padding: 14px 35px;
+    font-size: 0.95rem;
+    border-width: 1.5px;
+    border: 1px solid var(--accent-antique-gold); /* Ensure border is defined */
+    background: none; /* Explicitly set background */
+    color: var(--accent-antique-gold); /* Explicitly set color */
+    cursor: pointer; /* Ensure cursor is pointer */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s var(--ease-out-expo), box-shadow 0.3s ease;
+    font-family: 'Outfit', sans-serif; /* Ensure font is set */
+    font-weight: 500; /* Ensure font weight */
+    border-radius: 30px; /* Ensure border radius */
+    text-transform: uppercase; /* Ensure text transform */
+    letter-spacing: 0.8px; /* Ensure letter spacing */
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+section#collection .filter-btn.active,
+section#collection .filter-btn:hover {
+    background-color: var(--accent-antique-gold);
+    color: var(--primary-deep-charcoal);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 6px 15px rgba(190, 154, 106, 0.3);
+}
+section#collection .watches-gallery {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 30px;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    gap: 30px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-antique-gold) transparent;
+}
+section#collection .watches-gallery::-webkit-scrollbar { height: 8px; }
+section#collection .watches-gallery::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); border-radius: 10px; }
+section#collection .watches-gallery::-webkit-scrollbar-thumb { background-color: var(--accent-antique-gold); border-radius: 10px; border: 2px solid var(--secondary-light-ivory); }
+section#collection .watches-gallery::-webkit-scrollbar-thumb:hover { background-color: #b8986a; }
+section#collection .watch-display-card { /* These styles are SPECIFIC to cards in the homepage #collection section */
+    flex: 0 0 auto;
+    width: 340px;
+    height: auto;
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+    transition: transform 0.45s var(--ease-out-expo), box-shadow 0.45s var(--ease-out-expo);
+    overflow: visible;
+    position: relative;
+}
+section#collection .watch-display-card:hover {
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+}
+section#collection .watch-card-image-wrapper {
+    height: 360px;
+    border-radius: 16px 16px 0 0;
+    border-bottom: 1px solid #EAEAEA;
+    transition: border 0.3s ease;
+}
+section#collection .watch-display-card:hover .watch-card-image-wrapper { /* No specific border on hover for image wrapper here */ }
+section#collection .watch-card-image-wrapper img {
+    transition: transform 0.8s var(--ease-out-expo), filter 0.5s ease;
+}
+section#collection .watch-display-card:hover .watch-card-image-wrapper img {
+    transform: scale(1.1);
+}
+section#collection .watch-card-details {
+    padding: 25px;
+    background-color: #FFFFFF;
+    border-radius: 0 0 16px 16px;
+}
+section#collection .watch-card-brand { font-size: 0.9rem; letter-spacing: 1.2px; margin-bottom: 8px; }
+section#collection .watch-card-name { font-size: 1.7rem; margin-bottom: 12px; line-height: 1.25; }
+section#collection .watch-card-desc { font-size: 0.95rem; color: #606060; margin-bottom: 20px; min-height: 50px; }
+section#collection .watch-card-price { font-size: 1.6rem; font-weight: 700; color: var(--primary-deep-charcoal); padding-top: 15px; border-top: 1px solid #F0F0F0; text-align: right; }
+section#collection .watch-display-card::after { content: '\f061'; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; bottom: 25px; left: 25px; font-size: 1.2rem; color: var(--accent-antique-gold); opacity: 0; transform: translateX(-10px); transition: opacity 0.3s ease 0.1s, transform 0.3s var(--ease-out-expo) 0.1s; pointer-events: none; }
+section#collection .watch-display-card:hover::after { opacity: 1; transform: translateX(0); }
+section#collection .watches-gallery a { text-decoration: none; color: inherit; } /* Ensure links aren't underlined */
+
+
+/* --- TESTIMONIALS SECTION --- */
+#testimonials { background-color: #EFEBE5; }
+.testimonial-slider-wrapper { max-width: 750px; margin: 0 auto; position: relative; padding: 0 40px; }
+.testimonial-slide { text-align: center; padding: 20px 0; display: none; opacity: 0; transform: scale(0.95); transition: opacity 0.5s ease, transform 0.5s ease; }
+.testimonial-slide.active { display: block; opacity: 1; transform: scale(1); }
+.testimonial-author-img { width: 85px; height: 85px; border-radius: 50%; object-fit: cover; margin: 0 auto 25px auto; border: 4px solid var(--accent-antique-gold); box-shadow: var(--shadow-medium); }
+.testimonial-text { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; line-height: 1.85; color: var(--text-dark); margin-bottom: 25px; position: relative; max-width: 600px; margin-left:auto; margin-right:auto; }
+.testimonial-text::before { content: '“'; font-size: 4rem; color: var(--accent-antique-gold); opacity: 0.2; position: absolute; top: -20px; left: -25px; z-index: -1;}
+.testimonial-author-name { font-weight: 600; font-size: 1.15rem; color: var(--text-dark); letter-spacing: 0.5px; }
+.testimonial-nav { display: flex; justify-content: space-between; position: absolute; top: 50%; width: calc(100% - 40px); left: 20px; transform: translateY(-50%); z-index: 10; }
+.testimonial-nav button { background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); border: 1px solid var(--accent-antique-gold); color: var(--accent-antique-gold); width: 45px; height: 45px; border-radius: 50%; cursor: pointer; transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s var(--ease-out-expo); font-size: 1rem; }
+.testimonial-nav button:hover { background-color: var(--accent-antique-gold); color: var(--primary-deep-charcoal); transform: scale(1.1); }
+
+/* --- FAQ SECTION --- */
+#faq { background-color: var(--primary-deep-charcoal); }
+.faq-item { background-color: var(--surface-dark-accent); margin-bottom: 18px; border-radius: 8px; box-shadow: var(--shadow-soft); overflow:hidden; border: 1px solid rgba(190,154,106,0.15); }
+.faq-question { padding: 22px 30px; font-size: 1.2rem; font-weight: 500; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--text-light); transition: background-color 0.3s ease, color 0.3s ease; position: relative; }
+.faq-question::before { content: ''; position: absolute; top:0; left:0; width: 5px; height: 100%; background-color: var(--accent-antique-gold); opacity: 0; transform: scaleY(0); transform-origin: bottom; transition: opacity 0.3s ease, transform 0.4s var(--ease-out-expo); }
+.faq-question:hover { background-color: rgba(190,154,106,0.05); }
+.faq-icon { transition: transform 0.5s var(--ease-out-expo); font-size: 1rem; color: var(--accent-antique-gold); }
+.faq-item.active .faq-question { color: var(--accent-antique-gold); }
+.faq-item.active .faq-question::before { opacity: 0.6; transform: scaleY(1); }
+.faq-item.active .faq-icon { transform: rotate(135deg); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.6s var(--ease-out-expo), padding 0.6s var(--ease-out-expo), opacity 0.6s ease; padding: 0 30px; color: var(--text-light); line-height: 1.7; opacity: 0; }
+.faq-item.active .faq-answer { max-height: 300px; padding: 0px 30px 25px 30px; opacity: 0.85; }
+
+/* --- FOOTER --- */
+.footer { background-color: #0C0E10; color: var(--text-light); padding: 100px 0 50px; position: relative; overflow: hidden; }
+.footer::before { content: ''; position: absolute; bottom: -150px; right: -100px; width: 400px; height: 400px; background-image: url('../images/koi-silhouette-gold.png'); /* USER: Ensure path is correct */ background-repeat: no-repeat; background-size: contain; opacity: 0.04; transform: rotate(-30deg); pointer-events: none; }
+.footer-grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 50px; align-items: flex-start; margin-bottom: 60px; }
+.footer-logo-section .site-logo { /* No img selector needed as .site-logo is the img */ height: 85px; margin-bottom: 20px; filter: drop-shadow(0 0 15px rgba(200,168,118,0.3)); }
+.footer-tagline { font-size: 1rem; font-weight: 300; opacity: 0.8; margin-bottom: 25px; max-width: 300px; }
+.footer-social-links a { display: inline-block; color: var(--accent-burnished-silver); font-size: 1.3rem; margin-right: 20px; transition: color 0.3s ease, transform 0.3s var(--ease-out-expo); }
+.footer-social-links a:hover { color: var(--accent-antique-gold); transform: translateY(-3px); }
+.footer-column-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 25px; color: var(--accent-antique-gold); position: relative; padding-bottom: 10px; }
+.footer-column-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 2px; background-color: var(--accent-antique-gold); opacity: 0.5; transition: width 0.4s var(--ease-out-expo); }
+.footer-column:hover .footer-column-title::after { width: 60px; }
+.footer-nav-list { list-style: none; padding: 0; }
+.footer-nav-list li { margin-bottom: 12px; }
+.footer-nav-list a { color: var(--text-light); opacity: 0.75; text-decoration: none; font-weight: 300; position: relative; transition: color 0.3s ease, opacity 0.3s ease, padding-left 0.3s var(--ease-out-expo); }
+.footer-nav-list a::before { content: '›'; position: absolute; left: -15px; opacity: 0; color: var(--accent-antique-gold); transition: left 0.3s var(--ease-out-expo), opacity 0.3s ease; }
+.footer-nav-list a:hover { color: var(--accent-antique-gold); opacity: 1; padding-left: 8px; }
+.footer-nav-list a:hover::before { left: -5px; opacity: 1; }
+.footer-contact-info p { margin-bottom: 12px; font-weight: 300; opacity: 0.8; display: flex; align-items: flex-start; }
+.footer-contact-info i { color: var(--accent-antique-gold); margin-right: 12px; font-size: 1.1rem; margin-top: 4px; min-width: 20px; }
+.footer-bottom-bar { text-align: center; padding-top: 40px; border-top: 1px solid rgba(168, 174, 179, 0.1); font-size: 0.9rem; opacity: 0.6; font-weight: 300; }
+.footer-bottom-bar a { color: var(--accent-antique-gold); text-decoration: none; }
+.footer-bottom-bar a:hover { text-decoration: underline; }
+
+/* --- RESPONSIVE --- */
+@media (min-width: 1025px) {
+    .header { padding: 0 50px; }
+    .desktop-navigation { display: flex; }
+    .nav-toggle { display: none; }
+    .header.scrolled .site-logo { height: 75px; }
+    .main-navigation-overlay { clip-path: circle(0% at calc(100% - 70px) 70px); background-size: 50% auto; }
+    .nav-open .main-navigation-overlay { clip-path: circle(150% at calc(100% - 70px) 70px); }
+    .main-nav-link { font-size: 2.8rem; }
+}
+@media (max-width: 1024px) {
+    .site-logo { height: 75px; }
+    .header.scrolled .site-logo { height: 55px; }
+    .about-grid-layout { grid-template-columns: 1fr; }
+    .about-image-wrapper-enhanced { order: -1; min-height: 400px; margin-bottom: 40px; grid-column: 1 / -1; }
+    .about-image-accent { width: 120px; right: -25px; bottom: 10px; }
+    .about-text-content { padding-left: 0; grid-column: 1 / -1; text-align: center; }
+    .about-text-content .section-title { text-align: center; }
+    .about-text-content .section-title::after { left: 50%; transform: translateX(-50%); }
+}
+@media (max-width: 768px) {
+    .header { padding: 0 20px; }
+    .site-logo { height: 70px; }
+    .header.scrolled .site-logo { height: 50px; }
+    .main-nav-link { font-size: 2rem; }
+    .hero-title { font-size: 3rem; }
+    .section .section-title { font-size: 2.5rem; }
+    .section { padding: 90px 0;}
+    .hero-watch-showcase { display: none; }
+    .features-immersive-grid { grid-template-columns: 1fr; }
+    /* Generic .watches-gallery for other pages, if it exists as a grid */
+    /* .watches-gallery { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; } */
+    .footer-grid-layout { gap: 40px; }
+    .footer-column { text-align: center; }
+    .footer-column-title::after { left: 50%; transform: translateX(-50%); }
+    .footer-contact-info p { justify-content: center; }
+    .testimonial-slider-wrapper { padding: 0 10px;}
+    .testimonial-nav { width: calc(100% - 20px); left: 10px; }
+    .about-image-wrapper-enhanced { min-height: 320px; margin-bottom: 30px; }
+    .about-image-main { height: 300px; top: 20px; width: 95%; }
+    .about-image-accent { width: 100px; right: -15px; bottom: 15px; opacity: 0.12; }
+    .about-text-content .section-title { font-size: 2.2rem; }
+    .about-text-content .intro-paragraph { font-size: 1rem; }
+    .about-text-content .highlight-quote { font-size: 1.1rem; padding: 15px 20px; }
+    /* Homepage Collection Responsive */
+    section#collection .section-title { font-size: 2.8rem; }
+    section#collection .section-subtitle { font-size: 1.1rem; margin-bottom: 40px; }
+    section#collection .collection-filters { margin-bottom: 50px; gap: 15px; }
+    section#collection .filter-btn { padding: 12px 25px; font-size: 0.9rem; }
+    section#collection .watches-gallery { gap: 20px; margin-left: -15px; margin-right: -15px; padding-left: 15px; padding-right: 15px; }
+    section#collection .watch-display-card { width: 280px; }
+    section#collection .watch-card-image-wrapper { height: 300px; }
+    section#collection .watch-card-name { font-size: 1.4rem; }
+    section#collection .watch-card-price { font-size: 1.3rem; }
+    section#collection .watch-display-card::after { bottom: 20px; left: 20px; }
+}
+@media (max-width: 480px) {
+    .site-logo { height: 60px; }
+    .header.scrolled .site-logo { height: 45px; }
+    .main-nav-link { font-size: 1.8rem; padding: 10px 15px; }
+    .hero-title { font-size: 2.6rem; }
+    .section .section-title { font-size: 2.1rem; }
+    .main-navigation-overlay, .nav-open .main-navigation-overlay { clip-path: circle(150% at calc(100% - 35px) 40px); }
+    .about-image-wrapper-enhanced { min-height: 260px; }
+    .about-image-main { height: 240px; top: 15px; }
+    .about-image-accent { width: 70px; right: 5px; bottom: 5px; opacity: 0.1; /* display: none; */ }
+    .about-text-content .section-title { font-size: 1.9rem; }
+    .about-text-content .intro-paragraph { font-size: 0.9rem; }
+    .about-text-content .highlight-quote { font-size: 1rem; padding: 12px 15px; }
+    /* Homepage Collection Responsive Small Mobile */
+    section#collection .section-title { font-size: 2.3rem; }
+    section#collection .watches-gallery { width: calc(100% + 30px); /* Allow full bleed */ }
+    section#collection .watch-display-card { width: 260px; }
+    section#collection .watch-card-image-wrapper { height: 270px; }
+    section#collection .watch-card-name { font-size: 1.3rem; }
+    section#collection .watch-card-price { font-size: 1.2rem; }
+}

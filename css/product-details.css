@@ -1,0 +1,350 @@
+/* css/product-details.css */
+
+/* --- GENERAL PAGE SETUP --- */
+.product-detail-page-main {
+    padding-top: var(--header-height); /* Adjust if your header has a fixed height */
+    background-color: #FCFCFA; /* Very light, almost white background for the page */
+}
+
+#product-detail-section {
+    padding-top: 50px;
+    padding-bottom: 80px;
+}
+
+.breadcrumb-nav {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.breadcrumb-nav a {
+    color: #555;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.breadcrumb-nav a:hover {
+    color: var(--accent-antique-gold);
+}
+.breadcrumb-nav i {
+    font-size: 0.7rem;
+}
+.breadcrumb-nav span {
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+/* --- LOADING AND ERROR MESSAGES --- */
+.loading-message-product,
+.error-message-product {
+    text-align: center;
+    padding: 60px 20px;
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-dark);
+}
+.loading-message-product i {
+    font-size: 2rem;
+    color: var(--accent-antique-gold);
+    margin-right: 10px;
+    display: block;
+    margin-bottom: 15px;
+}
+.error-message-product h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--accent-antique-gold);
+    margin-bottom: 15px;
+}
+.error-message-product i {
+    margin-right: 10px;
+}
+.error-message-product p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: var(--text-dark-muted);
+}
+
+
+/* --- PRODUCT CONTENT WRAPPER --- */
+.product-content-wrapper {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr; /* Gallery slightly wider */
+    gap: 50px;
+    align-items: flex-start; /* Align items to the top of their grid cell */
+}
+
+/* --- PRODUCT GALLERY --- */
+.product-gallery-column {
+    position: sticky; /* Makes gallery sticky while scrolling info */
+    top: calc(var(--header-height) + 30px); /* Adjust based on header height */
+}
+
+.main-image-container {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border: 1px solid #EAEAEA;
+}
+#main-product-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1; /* Maintain square aspect ratio, adjust as needed */
+    object-fit: cover;
+    transition: transform 0.3s ease-out; /* For potential zoom effects */
+}
+/* Optional: Zoom on hover for main image if not using a lightbox
+.main-image-container:hover #main-product-image {
+    transform: scale(1.03);
+}
+*/
+
+.thumbnail-gallery {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap; /* Allow thumbnails to wrap if many */
+}
+.thumbnail-image {
+    width: 80px; /* Adjust size as needed */
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0.7;
+}
+.thumbnail-image:hover {
+    opacity: 1;
+    transform: scale(1.05);
+    border-color: var(--accent-antique-gold-translucent, rgba(190,154,106,0.5));
+}
+.thumbnail-image.active {
+    border-color: var(--accent-antique-gold, #BE9A6A);
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(190,154,106,0.3);
+}
+.thumbnail-image.video-thumb::before { /* For video icon overlay */
+    content: "\f03d"; /* FontAwesome video icon */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    color: rgba(255,255,255,0.8);
+    background-color: rgba(0,0,0,0.3);
+    padding: 8px;
+    border-radius: 50%;
+    pointer-events: none;
+}
+.video-link-container {
+    margin-top: 25px;
+    text-align: center;
+}
+
+
+/* --- PRODUCT INFO --- */
+.product-info-column {
+    padding: 10px; /* Small padding to not stick to edges if content is short */
+}
+
+.product-brand {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    color: var(--accent-antique-gold, #BE9A6A);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+}
+
+.product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem; /* Prominent name */
+    color: var(--text-dark, #1E2125);
+    line-height: 1.2;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.product-price {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2rem; /* Large price */
+    color: var(--primary-deep-charcoal);
+    font-weight: 600;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #EAEAEA;
+}
+
+.product-description-section,
+.product-meta-info {
+    margin-bottom: 30px;
+}
+
+.section-subtitle { /* For "Description", "Additional Details" */
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent-antique-gold);
+    display: inline-block; /* So border only spans text */
+}
+
+.product-description {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-dark-muted, #555);
+    white-space: pre-line; /* Preserve line breaks from description */
+}
+
+.product-actions {
+    display: flex;
+    flex-direction: column; /* Stack buttons */
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.cta-button { /* General CTA button styling */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 30px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    text-decoration: none;
+    border-radius: 50px; /* Pill shape */
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+.cta-button i {
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
+.cta-button-primary {
+    background-color: var(--accent-antique-gold);
+    color: var(--primary-deep-charcoal);
+    box-shadow: 0 4px 15px rgba(190,154,106,0.2);
+}
+.cta-button-primary:hover {
+    background-color: #D4AF7B; /* Lighter gold */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(190,154,106,0.3);
+}
+
+.cta-button-secondary { /* For video link */
+    background-color: var(--primary-deep-charcoal);
+    color: var(--text-light);
+}
+.cta-button-secondary:hover {
+    background-color: #33383F;
+    transform: translateY(-2px);
+}
+
+
+.cta-button-outline {
+    background-color: transparent;
+    color: var(--accent-antique-gold);
+    border-color: var(--accent-antique-gold);
+}
+.cta-button-outline:hover {
+    background-color: var(--accent-antique-gold-translucent, rgba(190,154,106,0.1));
+    color: #A8875F; /* Darker gold */
+}
+
+.product-meta-info p {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-dark-muted);
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+.product-meta-info p strong {
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 992px) { /* Tablet and below */
+    .product-content-wrapper {
+        grid-template-columns: 1fr; /* Stack columns */
+        gap: 40px;
+    }
+    .product-gallery-column {
+        position: static; /* Remove sticky behavior on smaller screens */
+        top: auto;
+        max-width: 600px; /* Limit gallery width */
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .product-name {
+        font-size: 2.4rem;
+    }
+    .product-price {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) { /* Mobile */
+    #product-detail-section {
+        padding-top: 30px;
+        padding-bottom: 60px;
+    }
+    .breadcrumb-nav {
+        margin-bottom: 20px;
+        font-size: 0.85rem;
+    }
+    .main-image-container {
+        border-radius: 10px;
+    }
+    .thumbnail-image {
+        width: 70px;
+        height: 70px;
+        border-radius: 6px;
+    }
+    .product-name {
+        font-size: 2rem;
+    }
+    .product-price {
+        font-size: 1.6rem;
+        margin-bottom: 25px;
+    }
+    .section-subtitle {
+        font-size: 1.15rem;
+    }
+    .product-description {
+        font-size: 1rem;
+    }
+    .cta-button {
+        padding: 12px 25px;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .thumbnail-image {
+        width: 60px;
+        height: 60px;
+    }
+    .product-name {
+        font-size: 1.8rem;
+    }
+     .product-price {
+        font-size: 1.5rem;
+    }
+}
