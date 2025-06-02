@@ -4,26 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us | JWICK.LP - Exquisite Vintage Horology</title>
-    <!-- Link to existing main CSS file -->
     <link rel="stylesheet" href="css/styles.css">
-    <!-- Link to new CSS file for this contact page -->
     <link rel="stylesheet" href="css/contact.css">
-    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
-    <!-- Custom Cursor (from original theme) -->
     <div class="custom-cursor">
         <div class="cursor-dot"></div>
         <div class="cursor-circle"></div>
     </div>
-
-    <!-- Preloader (from original theme) -->
     <div class="preloader">
         <img src="logo.png" alt="JWICK.LP Logo" class="preloader-logo">
     </div>
-
-    <!-- Header (Copied from other pages, ensure "Contact Us" can be an active link if desired) -->
     <header class="header">
         <a href="index.html" class="site-logo-link cursor-hoverable">
             <img src="logo.png" alt="JWICK.LP Logo" class="site-logo">
@@ -33,7 +25,7 @@
                 <li><a href="index.html" class="desktop-nav-link cursor-hoverable">Home</a></li>
                 <li><a href="about.html" class="desktop-nav-link cursor-hoverable">About</a></li>
                 <li><a href="collection.html" class="desktop-nav-link cursor-hoverable">Collection</a></li>
-                <li><a href="contact.html" class="desktop-nav-link cursor-hoverable active">Contact Us</a></li> <!-- Active link -->
+                <li><a href="contact.html" class="desktop-nav-link cursor-hoverable active">Contact Us</a></li>
                 <li><a href="index.html#faq" class="desktop-nav-link cursor-hoverable">FAQ</a></li>
             </ul>
         </nav>
@@ -56,30 +48,43 @@
     </header>
 
     <main class="contact-page-main">
-        <!-- Contact Hero Section -->
+        <!-- Contact Hero Section - Revised Structure -->
         <section id="contact-hero" class="section section-dark">
-            <!-- The background image for this hero will be set in contact.css -->
-            <div class="contact-hero-overlay"></div> <!-- For darkening the background image -->
-            <div class="container animated-item type-fade-in" style="animation-delay: 0.3s;">
-                <h1 class="contact-hero-title">Connect With Us</h1>
-                <p class="contact-hero-subtitle">Your inquiries are important to us. Whether you have questions about our collection, wish to schedule a viewing, or require expert advice, our team is ready to assist you with passion and precision.</p>
+            <canvas id="hero-background-canvas"></canvas>
+            
+            <div class="hero-watch-showcase">
+                <!-- Consider using fewer or different watch images here than on index.html -->
+                <div class="hero-watch hero-watch-1 cursor-hoverable" data-final-rotate="-5deg" data-final-translate-x="20vw" data-final-translate-y="25vh"><img src="watch-hero-1.png" alt="Featured Watch Alt 1"></div> <!-- USER: Update image path -->
+                <div class="hero-watch hero-watch-2 cursor-hoverable" data-final-rotate="5deg" data-final-translate-x="70vw" data-final-translate-y="55vh"><img src="watch-hero-3.png" alt="Featured Watch Alt 2"></div> <!-- USER: Update image path -->
+            </div>
+
+            <div class="hero-content-wrapper">
+                <div class="hero-logo-container animated-item type-fade-in" style="animation-delay: 0.2s;">
+                    <img src="logo.png" alt="JWICK.LP Logo">
+                </div>
+                <h1 class="contact-hero-title animated-item type-fade-in" style="animation-delay: 0.4s;">Connect With Us</h1>
+                <p class="contact-hero-subtitle animated-item type-fade-in" style="animation-delay: 0.6s;">
+                    Your inquiries are important. Whether you have questions about our collection, wish to schedule a viewing, or require expert advice, our team is ready to assist.
+                </p>
+                <!-- Optional: CTA Button
+                <a href="#contact-form-details-section" class="hero-cta cursor-hoverable animated-item type-fade-in" style="animation-delay: 0.8s;">Send a Message</a>
+                -->
             </div>
         </section>
 
         <!-- Contact Form & Details Section -->
-        <section id="contact-form-details-section" class="section section-light-alt"> <!-- Using a slightly different light bg -->
+        <section id="contact-form-details-section" class="section section-light-alt">
             <div class="container">
                 <div class="contact-section-intro animated-item type-slide-up">
                     <h2 class="section-title">We're Here to Listen</h2>
                     <p class="section-intro-p">Please use the form below for general inquiries or reach out to us directly through our provided contact channels. For specific timepiece questions, kindly mention the model or reference if possible.</p>
                 </div>
 
-                <div class="contact-grid-layout">
-                    <!-- Left Column: Contact Form -->
+                <div class="contact-grid-layout-revised"> <!-- Changed class for new layout -->
+                    <!-- Contact Form - Now potentially takes more space or is centered -->
                     <div class="contact-form-wrapper animated-item type-slide-in-left" data-animation-delay="0.2s">
                         <h3 class="contact-form-title">Send a Direct Message</h3>
                         <form id="contactForm" action="YOUR_FORM_SUBMISSION_ENDPOINT" method="POST">
-                            <!-- Replace YOUR_FORM_SUBMISSION_ENDPOINT with your actual backend or a service like Formspree -->
                             <div class="form-group">
                                 <label for="contact-name">Full Name</label>
                                 <input type="text" id="contact-name" name="name" placeholder="e.g., John Doe" required class="form-input cursor-hoverable">
@@ -102,32 +107,26 @@
                                 </button>
                             </div>
                         </form>
-                        <div id="form-status-message" class="form-status"></div> <!-- For AJAX success/error messages -->
+                        <div id="form-status-message" class="form-status"></div>
                     </div>
 
-                    <!-- Right Column: Contact Info & Map -->
+                    <!-- Contact Info - Address and Map removed -->
                     <div class="contact-info-map-wrapper animated-item type-slide-in-right" data-animation-delay="0.4s">
                         <div class="contact-info-block">
                             <h3 class="contact-info-title">Our Contact Channels</h3>
-                            <div class="info-item">
-                                <i class="info-icon fas fa-map-marker-alt"></i>
-                                <div class="info-content">
-                                    <h4>Visit Our Showroom (By Appointment)</h4>
-                                    <p>75/1A/12, Church Road,<br>Indigolla, Gampaha, Sri Lanka.</p>
-                                </div>
-                            </div>
+                            <!-- Address item removed -->
                             <div class="info-item">
                                 <i class="info-icon fas fa-phone-alt"></i>
                                 <div class="info-content">
                                     <h4>Speak to an Expert</h4>
-                                    <p><a href="tel:+94XXXXXXXXX" class="cursor-hoverable">+94 (XXX) XXX-XXXX</a></p>
+                                    <p><a href="tel:+94701876387" class="cursor-hoverable">+94 70 187 6387</a></p>
                                 </div>
                             </div>
                             <div class="info-item">
                                 <i class="info-icon fas fa-envelope"></i>
                                 <div class="info-content">
                                     <h4>Email Us</h4>
-                                    <p><a href="mailto:info@jwick.lp" class="cursor-hoverable">info@jwick.lp</a></p>
+                                    <p><a href="mailto:admin@jwicklp.com" class="cursor-hoverable">admin@jwicklp.com</a></p>
                                 </div>
                             </div>
                             <div class="info-item">
@@ -140,27 +139,19 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="map-block">
-                            <h3 class="map-title">Our Location</h3>
-                            <!-- Replace this div with your actual Google Maps embed code -->
-                            <div class="map-embed-container">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.969797579511!2d79.9960113152678!3d7.012370994934837!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2fc2322670923%3A0x63728b24757ea635!2sIndigolla%2C%20Gampaha!5e0!3m2!1sen!2slk!4v1678888888888!5m2!1sen!2slk" 
-                                width="100%" height="350" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Our Location Map"></iframe>
-                            </div>
-                        </div>
+                        <!-- Map block removed -->
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer (Copied from other pages) -->
-    <footer class="footer" id="footer-contact-info">
+     <footer class="footer">
+        <!-- ... your existing footer HTML ... -->
         <div class="container">
             <div class="footer-grid-layout" data-stagger-children="100">
                 <div class="footer-column footer-logo-section animated-item type-slide-up">
-                    <a href="index.html" class="site-logo-link cursor-hoverable"><img src="logo.png" alt="JWICK.LP Logo" class="site-logo"></a>
+                    <a href="index.html#hero" class="site-logo-link cursor-hoverable"><img src="logo.png" alt="JWICK.LP Logo" class="site-logo"></a>
                     <p class="footer-tagline">Exquisite Vintage Horology. Authenticity. Craftsmanship. Legacy.</p>
                     <div class="footer-social-links">
                         <a href="#" aria-label="Instagram" class="cursor-hoverable"><i class="fab fa-instagram"></i></a>
@@ -168,38 +159,39 @@
                         <a href="#" aria-label="Pinterest" class="cursor-hoverable"><i class="fab fa-pinterest-p"></i></a>
                     </div>
                 </div>
-                <div class="footer-column animated-item type-slide-up" style="transition-delay: 0.1s;">
+                <div class="footer-column animated-item type-slide-up">
                     <h3 class="footer-column-title">Explore</h3>
                     <ul class="footer-nav-list">
                         <li><a href="about.html" class="cursor-hoverable">Our Story</a></li>
                         <li><a href="index.html#why-choose-us" class="cursor-hoverable">Our Promise</a></li>
                         <li><a href="collection.html" class="cursor-hoverable">The Collection</a></li>
+                         <li><a href="contact.html" class="cursor-hoverable">Contact Us</a></li>
                         <li><a href="index.html#faq" class="cursor-hoverable">FAQ</a></li>
                     </ul>
                 </div>
-                <div class="footer-column animated-item type-slide-up" style="transition-delay: 0.2s;">
+                <div class="footer-column animated-item type-slide-up">
                     <h3 class="footer-column-title">Support</h3>
                     <ul class="footer-nav-list">
                         <li><a href="contact.html" class="cursor-hoverable">Contact Us</a></li>
-                        <li><a href="#" class="cursor-hoverable">Shipping & Returns</a></li>
-                        <li><a href="#" class="cursor-hoverable">Warranty Information</a></li>
-                        <li><a href="#" class="cursor-hoverable">Privacy Policy</a></li>
+                        <li><a href="shipping-returns.html" class="cursor-hoverable">Shipping & Returns</a></li>
+                        <li><a href="warranty.html" class="cursor-hoverable">Warranty Information</a></li>
+                        <li><a href="privacy-policy.html" class="cursor-hoverable">Privacy Policy</a></li>
                     </ul>
                 </div>
-                <div class="footer-column footer-contact-info animated-item type-slide-up" style="transition-delay: 0.3s;">
+                 <div class="footer-column footer-contact-info animated-item type-slide-up">
                     <h3 class="footer-column-title">Get In Touch</h3>
                     <p><i class="fas fa-map-marker-alt"></i> 75/1A/12, Church Road,<br>Indigolla, Gampaha, Sri Lanka.</p>
                     <p><i class="fas fa-phone-alt"></i> <a href="tel:+94XXXXXXXXX" class="cursor-hoverable" style="color: inherit; text-decoration: none;">+94 70 187 6387</a></p>
                     <p><i class="fas fa-envelope"></i> <a href="mailto:info@jwick.lp" class="cursor-hoverable" style="color: inherit; text-decoration: none;">admin@jwicklp.com</a></p>
                 </div>
             </div>
-            <div class="footer-bottom-bar animated-item type-slide-up" style="transition-delay: 0.4s;">
+            <div class="footer-bottom-bar animated-item type-slide-up" >
                 <p>© <span id="currentYear"></span> JWICK.LP. All Rights Reserved. Designed with Passion.</p>
             </div>
         </div>
     </footer>
 
     <script src="js/script.js"></script>
-    <!-- Optional: <script src="js/contact-form.js"></script> for AJAX form handling -->
+    <!-- <script src="js/contact-form.js"></script> -->
 </body>
 </html>

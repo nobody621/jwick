@@ -459,3 +459,100 @@ section#collection .watches-gallery a { text-decoration: none; color: inherit; }
     section#collection .watch-card-name { font-size: 1.3rem; }
     section#collection .watch-card-price { font-size: 1.2rem; }
 }
+/* --- STYLES FOR POLICY PAGES --- */
+.page-policy-content {
+    /* padding-top: 60px; */ /* Body already has padding-top from header */
+    padding-bottom: 80px;
+}
+.page-policy-content .container {
+    max-width: 900px; /* For better readability of text */
+}
+.page-policy-content .page-header-title { /* Renamed from h1.page-header-title to be more specific */
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: var(--accent-antique-gold);
+    text-align: center;
+    margin-bottom: 50px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+.page-policy-content .policy-text-content h2 { /* Targeted h2 within .policy-text-content */
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--text-dark); /* Assuming section-light background */
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    border-bottom: 1px solid var(--accent-antique-gold-translucent);
+    padding-bottom: 10px;
+}
+.page-policy-content .policy-text-content h3 { /* Added styling for H3 if needed */
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+.page-policy-content .policy-text-content p, 
+.page-policy-content .policy-text-content ul li,
+.page-policy-content .policy-text-content ol li {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-dark-muted);
+    margin-bottom: 20px;
+}
+.page-policy-content .policy-text-content ul,
+.page-policy-content .policy-text-content ol {
+    list-style-position: outside;
+    padding-left: 25px;
+    margin-bottom: 20px;
+}
+.page-policy-content .policy-text-content ul li,
+.page-policy-content .policy-text-content ol li {
+    margin-bottom: 10px;
+}
+.page-policy-content .policy-text-content strong {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+.page-policy-content .policy-text-content a {
+    color: var(--accent-antique-gold);
+    text-decoration: none;
+    font-weight: 500;
+}
+.page-policy-content .policy-text-content a:hover {
+    text-decoration: underline;
+    color: var(--accent-antique-gold-darker);
+}
+
+/* Responsive adjustments for policy pages */
+@media (max-width: 768px) {
+    .page-policy-content .page-header-title {
+        font-size: 2.4rem;
+        margin-bottom: 40px;
+    }
+    .page-policy-content .policy-text-content h2 {
+        font-size: 1.6rem;
+    }
+    .page-policy-content .policy-text-content h3 {
+        font-size: 1.3rem;
+    }
+    .page-policy-content .policy-text-content p,
+    .page-policy-content .policy-text-content ul li,
+    .page-policy-content .policy-text-content ol li {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-policy-content .page-header-title {
+        font-size: 2rem;
+    }
+    .page-policy-content .policy-text-content h2 {
+        font-size: 1.4rem;
+    }
+     .page-policy-content .policy-text-content h3 {
+        font-size: 1.2rem;
+    }
+}

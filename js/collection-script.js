@@ -54,12 +54,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Apply brand filter
             if (selectedBrand && selectedBrand !== 'all') {
-                // Ensure the brand value from the dropdown matches exactly how it's stored in Supabase.
-                // Supabase is case-sensitive for string comparisons.
-                // If your HTML <option value="..."> are lowercase (e.g., "seiko") but your DB stores "Seiko",
-                // you might need to adjust either the option values or handle capitalization here.
-                // For this example, I'm assuming the values match.
-                query = query.eq('brand', selectedBrand);
+                let brandFilterValue = selectedBrand; // Start with the selected value
+
+                // IMPORTANT FIX: Supabase .eq() is case-sensitive.
+                // Convert the dropdown value to match the expected casing in your Supabase 'brand' column.
+                // Assuming your database stores brand names like "Seiko", "Citizen", "Swiss", "Other".
+                if (selectedBrand === 'seiko') {
+                    brandFilterValue = 'Seiko';
+                } else if (selectedBrand === 'citizen') {
+                    brandFilterValue = 'Citizen';
+                } else if (selectedBrand === 'swiss') {
+                    brandFilterValue = 'Swiss';
+                } else if (selectedBrand === 'other') {
+                    // Assuming 'Other' is also a specific brand name stored with a capital 'O' in your database.
+                    // If 'other' is meant to categorize watches NOT in the explicitly listed brands,
+                    // you would need a more complex Supabase query (e.g., .not.in()).
+                    brandFilterValue = 'Other';
+                }
+                // If you add more brands to your dropdown, remember to add
+                // corresponding `else if` conditions here for their correct casing.
+
+                query = query.eq('brand', brandFilterValue);
             }
 
             // Apply sorting
@@ -138,6 +153,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let brandName = product.brand || "Vintage Collection";
             // Your existing brand guessing logic (can be kept or simplified if 'brand' column is reliable)
+            // This part renders the brand name that's actually *in* the database,
+            // so it doesn't need the case conversion.
             if (!product.brand && product.Name) {
                 const nameParts = product.Name.split(' ');
                 const knownBrands = ['Seiko', 'Citizen', 'Rolex', 'Omega', 'Swiss', 'Patek', 'Audemars'];
@@ -147,7 +164,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const mainImageColumn = 'Main image';
-            const imageUrl = product[mainImageColumn] || 'placeholder-watch-card.png';
+            // It's good practice to ensure 'images/' prefix if your images are in that folder
+            // and the column only stores the filename.
+            const imageUrl = product[mainImageColumn] ? product[mainImageColumn] : 'images/placeholder-watch-card.png';
 
             const formattedPrice = product.Price ? `$${Number(product.Price).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : 'POA';
             const shortDescription = product.Description ? product.Description.substring(0, 70) + (product.Description.length > 70 ? '...' : '') : 'Exquisite timepiece.';

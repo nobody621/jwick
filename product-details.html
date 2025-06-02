@@ -4,28 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Details | JWICK.LP</title>
-    <!-- Link to existing main CSS file -->
     <link rel="stylesheet" href="css/styles.css">
-    <!-- Link to new CSS file for this product page -->
     <link rel="stylesheet" href="css/product-details.css">
-    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <!-- Supabase Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-    <!-- Custom Cursor (from original theme) -->
     <div class="custom-cursor">
         <div class="cursor-dot"></div>
         <div class="cursor-circle"></div>
     </div>
-
-    <!-- Preloader (from original theme) -->
     <div class="preloader">
         <img src="logo.png" alt="JWICK.LP Logo" class="preloader-logo">
     </div>
 
-    <!-- Header (Adapted for this page) -->
     <header class="header">
         <a href="index.html" class="site-logo-link cursor-hoverable">
             <img src="logo.png" alt="JWICK.LP Logo" class="site-logo">
@@ -73,16 +65,12 @@
                 </div>
 
                 <div id="product-content-wrapper" class="product-content-wrapper" style="display: none;">
-                    <!-- Layout: Image Gallery on Left, Info on Right -->
                     <div class="product-gallery-column animated-item type-slide-in-left">
                         <div class="main-image-container">
                             <img src="placeholder-watch-detail.png" alt="Main product image" id="main-product-image" class="cursor-hoverable">
                         </div>
-                        <div class="thumbnail-gallery">
-                            <!-- Thumbnails will be dynamically added here -->
-                            <!-- Example: <img src="..." alt="Thumbnail 1" class="thumbnail-image active" data-fullimage="..."> -->
-                        </div>
-                         <div id="video-link-container" class="video-link-container" style="display: none;">
+                        <div class="thumbnail-gallery"></div>
+                        <div id="video-link-container" class="video-link-container" style="display: none;">
                             <a href="#" id="product-video-link" class="cta-button cta-button-secondary cursor-hoverable" target="_blank">
                                 <i class="fas fa-video"></i> View Product Video
                             </a>
@@ -100,9 +88,8 @@
                         </div>
 
                         <div class="product-actions">
-                             <!-- You can add quantity selector here if needed -->
-                            <button id="inquire-button" class="cta-button cta-button-primary cursor-hoverable">
-                                <i class="fas fa-envelope"></i> Inquire About This Piece
+                            <button id="buy-now-button" class="cta-button cta-button-primary cursor-hoverable">
+                                <i class="fas fa-shield-alt"></i> Secure Checkout
                             </button>
                             <a href="collection.html" class="cta-button cta-button-outline cursor-hoverable">
                                 <i class="fas fa-arrow-left"></i> Back to Collection
@@ -113,30 +100,90 @@
                             <h3 class="section-subtitle">Additional Details</h3>
                             <p><strong>Reference ID:</strong> <span id="product-id-display">N/A</span></p>
                             <p><strong>Listed On:</strong> <span id="product-created-at">N/A</span></p>
-                            <!-- Add more meta data if available, e.g., case size, material -->
                         </div>
                     </div>
                 </div>
-                 <div id="product-not-found-message" class="error-message-product" style="display: none;">
+
+                <!-- Delivery Information Form (Initially Hidden) -->
+                <div id="delivery-info-section" class="delivery-info-section animated-item type-fade-in" style="display: none;">
+                    <div class="delivery-form-header">
+                        <i class="fas fa-truck"></i>
+                        <h2>Delivery Information</h2>
+                        <p>Please provide your details for shipping.</p>
+                    </div>
+                    <form id="delivery-form" class="delivery-form">
+                        <div class="form-grid">
+                            <div class="form-group form-group-half">
+                                <label for="delivery-firstname">First Name <span class="required-asterisk">*</span></label>
+                                <input type="text" id="delivery-firstname" name="firstname" required placeholder="e.g., John">
+                            </div>
+                            <div class="form-group form-group-half">
+                                <label for="delivery-lastname">Last Name <span class="required-asterisk">*</span></label>
+                                <input type="text" id="delivery-lastname" name="lastname" required placeholder="e.g., Doe">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="delivery-email">Email Address <span class="required-asterisk">*</span></label>
+                            <input type="email" id="delivery-email" name="email" required placeholder="e.g., john.doe@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="delivery-address1">Street Address <span class="required-asterisk">*</span></label>
+                            <input type="text" id="delivery-address1" name="address1" required placeholder="e.g., 123 Vintage Lane">
+                        </div>
+                        <div class="form-group">
+                            <label for="delivery-address2">Apartment, Suite, etc. (Optional)</label>
+                            <input type="text" id="delivery-address2" name="address2" placeholder="e.g., Apt 4B">
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group form-group-third">
+                                <label for="delivery-city">City <span class="required-asterisk">*</span></label>
+                                <input type="text" id="delivery-city" name="city" required placeholder="e.g., Horologyville">
+                            </div>
+                            <div class="form-group form-group-third">
+                                <label for="delivery-postalcode">Postal/ZIP Code <span class="required-asterisk">*</span></label>
+                                <input type="text" id="delivery-postalcode" name="postalcode" required placeholder="e.g., 90210">
+                            </div>
+                            <div class="form-group form-group-third">
+                                <label for="delivery-country">Country (3-letter code) <span class="required-asterisk">*</span></label>
+                                <input type="text" id="delivery-country" name="country" required placeholder="e.g., USA, GBR, CAN" maxlength="3" minlength="3" pattern="[A-Za-z]{3}">
+                                <small>Find 3-letter codes <a href="https://www.iso.org/obp/ui/#search/code/" target="_blank" rel="noopener noreferrer" class="info-link">here</a> (Alpha-3).</small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="delivery-phone">Phone Number (Optional)</label>
+                            <input type="tel" id="delivery-phone" name="phone" placeholder="e.g., +1-555-123-4567">
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" id="cancel-delivery-button" class="cta-button cta-button-outline cursor-hoverable">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                            <button type="submit" id="proceed-to-payment-button" class="cta-button cta-button-primary cta-button-special cursor-hoverable">
+                                <i class="fas fa-credit-card"></i> Proceed to Payment
+                            </button>
+                        </div>
+                        <div id="delivery-form-error" class="form-error-message" style="display: none;"></div>
+                    </form>
+                </div>
+
+                <div id="product-not-found-message" class="error-message-product" style="display: none;">
                     <h2><i class="fas fa-exclamation-triangle"></i> Product Not Found</h2>
                     <p>Sorry, the timepiece you are looking for could not be found or is no longer available.</p>
                     <a href="collection.html" class="cta-button cta-button-primary cursor-hoverable">Return to Collection</a>
                 </div>
             </div>
         </section>
-        
-        <!-- Optional: "You Might Also Like" Section -->
-        <!-- <section id="related-products" class="section section-light-alt"> ... </section> -->
-
     </main>
 
-    <!-- Footer (from original theme) -->
-    <footer class="footer" id="footer-contact-info">
-        <!-- ... (Copy footer content from collection.html) ... -->
-         <div class="container">
+    <!-- Floating WhatsApp Button -->
+    <a id="floating-whatsapp-button" href="#" class="floating-whatsapp-btn cursor-hoverable" aria-label="Inquire via WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <footer class="footer">
+        <div class="container">
             <div class="footer-grid-layout" data-stagger-children="100">
                 <div class="footer-column footer-logo-section animated-item type-slide-up">
-                    <a href="index.html" class="site-logo-link cursor-hoverable"><img src="logo.png" alt="JWICK.LP Logo" class="site-logo"></a>
+                    <a href="index.html#hero" class="site-logo-link cursor-hoverable"><img src="logo.png" alt="JWICK.LP Logo" class="site-logo"></a>
                     <p class="footer-tagline">Exquisite Vintage Horology. Authenticity. Craftsmanship. Legacy.</p>
                     <div class="footer-social-links">
                         <a href="#" aria-label="Instagram" class="cursor-hoverable"><i class="fab fa-instagram"></i></a>
@@ -144,40 +191,39 @@
                         <a href="#" aria-label="Pinterest" class="cursor-hoverable"><i class="fab fa-pinterest-p"></i></a>
                     </div>
                 </div>
-                <div class="footer-column animated-item type-slide-up" style="transition-delay: 0.1s;">
+                <div class="footer-column animated-item type-slide-up">
                     <h3 class="footer-column-title">Explore</h3>
                     <ul class="footer-nav-list">
                         <li><a href="about.html" class="cursor-hoverable">Our Story</a></li>
                         <li><a href="index.html#why-choose-us" class="cursor-hoverable">Our Promise</a></li>
                         <li><a href="collection.html" class="cursor-hoverable">The Collection</a></li>
+                         <li><a href="contact.html" class="cursor-hoverable">Contact Us</a></li>
                         <li><a href="index.html#faq" class="cursor-hoverable">FAQ</a></li>
                     </ul>
                 </div>
-                <div class="footer-column animated-item type-slide-up" style="transition-delay: 0.2s;">
+                <div class="footer-column animated-item type-slide-up">
                     <h3 class="footer-column-title">Support</h3>
                     <ul class="footer-nav-list">
-                        <li><a href="#footer-contact-info" class="cursor-hoverable">Contact Us</a></li>
-                        <li><a href="#" class="cursor-hoverable">Shipping & Returns</a></li>
-                        <li><a href="#" class="cursor-hoverable">Warranty Information</a></li>
-                        <li><a href="#" class="cursor-hoverable">Privacy Policy</a></li>
+                        <li><a href="contact.html" class="cursor-hoverable">Contact Us</a></li>
+                        <li><a href="shipping-returns.html" class="cursor-hoverable">Shipping & Returns</a></li>
+                        <li><a href="warranty.html" class="cursor-hoverable">Warranty Information</a></li>
+                        <li><a href="privacy-policy.html" class="cursor-hoverable">Privacy Policy</a></li>
                     </ul>
                 </div>
-                <div class="footer-column footer-contact-info animated-item type-slide-up" style="transition-delay: 0.3s;">
+                 <div class="footer-column footer-contact-info animated-item type-slide-up">
                     <h3 class="footer-column-title">Get In Touch</h3>
                     <p><i class="fas fa-map-marker-alt"></i> 75/1A/12, Church Road,<br>Indigolla, Gampaha, Sri Lanka.</p>
-                    <p><i class="fas fa-phone-alt"></i> <a href="tel:+94XXXXXXXXX" class="cursor-hoverable" style="color: inherit; text-decoration: none;">+94 70 187 6387</a></p>
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:info@jwick.lp" class="cursor-hoverable" style="color: inherit; text-decoration: none;">admin@jwicklp.com</a></p>
+                    <p><i class="fas fa-phone-alt"></i> <a href="tel:+94701876387" class="cursor-hoverable" style="color: inherit; text-decoration: none;">+94 70 187 6387</a></p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:admin@jwicklp.com" class="cursor-hoverable" style="color: inherit; text-decoration: none;">admin@jwicklp.com</a></p>
                 </div>
             </div>
-            <div class="footer-bottom-bar animated-item type-slide-up" style="transition-delay: 0.4s;">
+            <div class="footer-bottom-bar animated-item type-slide-up" >
                 <p>© <span id="currentYear"></span> JWICK.LP. All Rights Reserved. Designed with Passion.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Link to existing main JS file (handles hero animations, cursor, etc.) -->
     <script src="js/script.js"></script>
-    <!-- Product Detail page specific JS file -->
     <script src="js/product-details.js"></script>
 </body>
 </html>

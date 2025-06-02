@@ -1,4 +1,4 @@
-/* css/collection-page.css */
+/* css/collection.css */
 
 /* Ensure this file is linked AFTER your main styles.css in the HTML
    It assumes variables like --primary-deep-charcoal, --accent-antique-gold, etc.,
@@ -14,27 +14,32 @@
     color: var(--accent-antique-gold); /* Keep gold on hover if active */
 }
 
-/* --- COLLECTION HERO SECTION --- */
-/* Reusing existing hero from index.html as per provided HTML structure */
-
-
-/* --- FILTERS AND INTRODUCTION SECTION --- */
+/* ======================================= */
+/* Collection Introduction and Filters ==== */
+/* ======================================= */
 #collection-intro-filters {
     padding-top: 80px;
     padding-bottom: 60px;
-    border-bottom: 1px solid rgba(0,0,0,0.08);
+    /* --- FIX: Change background to dark as per image --- */
+    background-color: var(--bg-dark); /* Using dark background variable from styles.css */
+    color: var(--text-light); /* Default text color for the section */
+    border-bottom: 1px solid rgba(255,255,255,0.08); /* Lighter border on dark bg */
 }
 
 .collection-controls-wrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Default for small screens */
     gap: 40px;
+    max-width: var(--max-content-width); /* Assuming this variable is defined */
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .collection-intro-text .section-title-alt {
     font-family: 'Playfair Display', serif;
     font-size: 2.2rem;
-    color: var(--text-dark);
+    /* --- FIX: Text color for dark background --- */
+    color: var(--text-light);
     margin-bottom: 15px;
     text-align: left;
 }
@@ -42,8 +47,9 @@
 .collection-intro-text p {
     font-size: 1.05rem;
     line-height: 1.8;
-    color: var(--text-dark);
-    opacity: 0.8;
+    /* --- FIX: Text color for dark background --- */
+    color: var(--text-light-muted); /* Softer light text for paragraph */
+    opacity: 0.9; /* Slightly less opaque for better contrast */
     max-width: 900px;
 }
 .collection-intro-text p a {
@@ -61,32 +67,47 @@
     gap: 20px;
     align-items: flex-end; /* Align items to bottom if heights differ */
     padding: 25px;
-    background-color: #FDFBF7; /* Slightly off-white */
+    /* --- Keep background light as per image --- */
+    background-color: #FDFBF7; /* Your specified slightly off-white */
     border-radius: 8px;
-    box-shadow: var(--shadow-soft);
+    box-shadow: var(--shadow-soft); /* Assuming this variable is defined */
     border: 1px solid rgba(0,0,0,0.05);
+    width: 100%; /* Ensure it takes full width for responsive layout */
+    max-width: 900px; /* Limit filter section width on large screens */
+    margin-top: 20px; /* Add some top margin to separate from intro text */
 }
 .filter-group {
     display: flex;
     flex-direction: column;
+    flex-grow: 1; /* Allow groups to grow */
+    min-width: 180px; /* Minimum width for filter groups to prevent squishing */
 }
 .filter-group label {
     font-size: 0.9rem;
     font-weight: 500;
-    color: var(--text-dark);
+    /* --- FIX: Label color for light background --- */
+    color: var(--text-dark); /* Keep label dark on light filter box */
     margin-bottom: 8px;
 }
 
 .filter-select {
     padding: 12px 18px;
-    border: 1px solid var(--accent-burnished-silver);
+    border: 1px solid var(--accent-burnished-silver); /* Assuming this variable is defined */
     background-color: #fff;
     color: var(--text-dark);
     border-radius: 6px;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Outfit', sans-serif; /* Assuming this font is loaded */
     font-size: 1rem;
-    min-width: 200px;
+    width: 100%; /* Ensure it takes full width within its group */
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    /* Custom arrow for select */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23666' d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 6.757 7.586 5.343 9z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 1em;
 }
 .filter-select:focus {
     outline: none;
@@ -106,28 +127,74 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    align-self: flex-end; /* Align with bottom of selects */
 }
 .filter-apply-btn:hover {
-    background-color: #D4AF7B;
+    background-color: #D4AF7B; /* Your specified hover color */
     transform: translateY(-2px);
 }
 
+/* Responsive adjustments for filters */
+@media (min-width: 768px) {
+    .collection-controls-wrapper {
+        flex-direction: row; /* Side-by-side on larger screens */
+        justify-content: space-between;
+        /* --- FIX: Align items centrally to match image --- */
+        align-items: center; /* This centers the shorter filter box with the longer text */
+    }
+    .collection-filters-placeholder {
+        justify-content: flex-end; /* Align filter groups to the right */
+        flex-grow: 0; /* Prevent unwanted growth */
+        max-width: fit-content; /* Only take space needed */
+    }
+    .filter-group {
+        flex-grow: 0; /* Prevent unwanted growth */
+        min-width: unset;
+    }
+}
+@media (max-width: 550px) {
+    .collection-filters-placeholder {
+        flex-direction: column;
+        align-items: stretch; /* Stretch items to fill column */
+    }
+    .filter-group {
+        width: 100%;
+    }
+    .filter-apply-btn {
+        width: 100%;
+    }
+}
 
-/* --- PRODUCT GRID SECTION --- */
+
+/* ================================== */
+/* ======= Product Grid Display ===== */
+/* ================================== */
 .section-light-alt {
-    background-color: #F5F2ED; /* Slightly different light shade for the section background */
+    background-color: #F5F2ED; /* Your specified slightly different light shade for the section background */
 }
 
 #product-grid-display .section-title {
     margin-bottom: 50px;
     color: var(--text-dark);
+    font-family: var(--font-fancy); /* Assuming this variable is defined */
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    text-align: center;
 }
 
 .products-grid-placeholder {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 35px; /* Increased gap slightly */
+    /* --- CRUCIAL FIX FOR STRETCHING (from previous solution) --- */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 370px)); /* min 300px, max 370px per column */
+    gap: 35px; /* Your specified gap */
     margin-bottom: 50px;
+
+    /* --- IMPORTANT: Constrain the overall grid container and center it --- */
+    max-width: 1200px; /* Max width for the entire grid */
+    margin-left: auto; /* Center the grid horizontally */
+    margin-right: auto; /* Center the grid horizontally */
+    padding: 0 20px; /* Add some padding to the sides within the container */
+
+    justify-content: center; /* This will center grid items horizontally if there's extra space */
 }
 
 /* --- STYLES FOR DYNAMICALLY LOADED PRODUCT CARDS --- */
@@ -136,17 +203,17 @@
     text-decoration: none; /* Crucial to remove underlines from child text elements */
     color: inherit;
     display: block; /* Makes the link behave like a block container */
-    border-radius: 12px; /* More pronounced rounding */
+    border-radius: 12px; /* Your specified rounding */
     overflow: hidden; /* Ensures content respects border-radius */
-    background-color: var(--secondary-light-ivory, #F9F6F2); /* Card background on link itself */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.07); /* Softer initial shadow */
-    transition: box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+    background-color: var(--secondary-light-ivory, #F9F6F2); /* Your specified card background */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.07); /* Your specified initial shadow */
+    transition: box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                 transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .watch-display-card-link:hover {
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1), 0 3px 10px rgba(0,0,0,0.06); /* Enhanced shadow on hover */
-    transform: translateY(-8px); /* Lift effect */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1), 0 3px 10px rgba(0,0,0,0.06); /* Your specified enhanced shadow on hover */
+    transform: translateY(-8px); /* Your specified lift effect */
 }
 
 .watch-display-card {
@@ -154,97 +221,106 @@
     flex-direction: column;
     height: 100%; /* Ensures cards in a row can align if details have varying heights */
     /* background-color, border-radius, box-shadow, overflow are handled by .watch-display-card-link now */
+    opacity: 0; /* Initial state for animation */
+    transform: translateY(20px) scale(0.95); /* Initial state for animation */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Match script.js animation */
 }
 
+/* Animations for animated-item (also present in script.js, but good to keep here for clarity) */
+.animated-item.type-slide-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.animated-item.type-scale-up.is-visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+
 .watch-card-image-wrapper {
-    height: 280px; /* Increased image height */
+    height: 280px; /* Your specified image height */
     overflow: hidden; /* Clip the image if it's larger than the wrapper */
     position: relative; /* For potential future overlays */
-    background-color: #E0E0E0; /* Fallback background for image area */
+    background-color: #E0E0E0; /* Your specified fallback background for image area */
 }
 
 .watch-card-image-wrapper img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures image covers the area, might crop but no distortion */
+    object-fit: cover; /* Your specified: Ensures image covers the area, might crop but no distortion */
     transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother zoom */
 }
 
 .watch-display-card-link:hover .watch-card-image-wrapper img {
-    transform: scale(1.08); /* Slightly more pronounced zoom on hover */
+    transform: scale(1.08); /* Your specified slightly more pronounced zoom on hover */
 }
 
 .watch-card-details {
-    padding: 25px; /* Generous padding for content */
+    padding: 25px; /* Your specified generous padding for content */
     flex-grow: 1; /* Allows this section to take available space */
     display: flex;
     flex-direction: column;
     text-align: left;
-    background-color: #FFFFFF; /* Crisp white background for the details section */
-    border-top: 1px solid #F0F0F0; /* Subtle separator if image and details bg are different */
+    background-color: #FFFFFF; /* Your specified crisp white background for the details section */
+    border-top: 1px solid #F0F0F0; /* Your specified subtle separator */
 }
 
 .watch-card-brand {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Outfit', sans-serif; /* Assuming this font is loaded */
     font-size: 0.85rem;
-    color: var(--accent-antique-gold, #BE9A6A);
+    color: var(--accent-antique-gold, #BE9A6A); /* Your specified accent color */
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1.2px; /* More spacing for brand */
+    letter-spacing: 1.2px; /* Your specified spacing for brand */
     margin-bottom: 8px;
     display: block;
 }
 
 .watch-card-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.7rem; /* Larger, more prominent name */
-    color: var(--text-dark, #333333);
+    font-family: 'Playfair Display', serif; /* Assuming this font is loaded */
+    font-size: 1.7rem; /* Your specified larger, more prominent name */
+    color: var(--text-dark, #333333); /* Your specified text color */
     margin-bottom: 12px;
     line-height: 1.25; /* Adjusted for larger font size */
     font-weight: 700;
 }
 
 .watch-card-desc {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Outfit', sans-serif; /* Assuming this font is loaded */
     font-size: 0.95rem;
-    color: #666666; /* Softer color for description text */
+    color: #666666; /* Your specified softer color for description text */
     line-height: 1.7;
-    margin-bottom: 20px; /* More space before the price */
+    margin-bottom: 20px; /* Your specified more space before the price */
     flex-grow: 1; /* Pushes price to the bottom if content is short */
 }
 
 .watch-card-price {
-    font-family: 'Outfit', sans-serif;
-    font-size: 1.5rem; /* Larger price */
+    font-family: 'Outfit', sans-serif; /* Assuming this font is loaded */
+    font-size: 1.5rem; /* Your specified larger price */
     font-weight: 700;
-    color: var(--primary-deep-charcoal, #1E2125);
+    color: var(--primary-deep-charcoal, #1E2125); /* Your specified text color */
     margin-top: auto; /* Ensures price is at the bottom */
-    padding-top: 15px; /* Space above the price */
-    border-top: 1px solid #EEEEEE; /* Subtle separator line above price */
-    text-align: right; /* Align price to the right */
+    padding-top: 15px; /* Your specified space above the price */
+    border-top: 1px solid #EEEEEE; /* Your specified subtle separator line above price */
+    text-align: right; /* Your specified align price to the right */
 }
 
 
-/* Fallback styles for product card placeholders (if needed, or remove if not used) */
-.product-card-placeholder {
-    background-color: var(--secondary-light-ivory);
-    border-radius: 10px;
-    box-shadow: var(--shadow-soft);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo);
-}
-/* ... other placeholder styles from your original file ... */
-
-
+/* ===================================== */
+/* ======= Collection Message ========= */
+/* ===================================== */
 .collection-message {
     text-align: center;
     margin-top: 40px;
     padding: 25px;
-    background-color: var(--secondary-light-ivory);
+    background-color: var(--secondary-light-ivory); /* Your specified background */
     border-radius: 8px;
-    border: 1px dashed var(--accent-antique-gold);
+    border: 1px dashed var(--accent-antique-gold); /* Your specified dashed border */
+    max-width: var(--max-content-width); /* Constrain width */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px; /* Ensure padding on smaller screens */
+    padding-right: 20px;
 }
 .collection-message p {
     font-size: 1.1rem;
@@ -260,27 +336,44 @@
     text-decoration: underline;
 }
 
-/* --- COLLECTION ETHOS SECTION --- */
+/* ==================================== */
+/* ======= Featured Brands / Ethos ==== */
+/* ==================================== */
+#collection-ethos {
+    padding: 80px 0;
+    background-color: var(--bg-dark); /* Assuming this variable is defined */
+    color: var(--text-light); /* Assuming this variable is defined */
+}
+
 .ethos-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 35px;
-    margin-top: 30px;
+    max-width: var(--max-content-width); /* Assuming this variable is defined */
+    margin: 30px auto 0; /* Add margin-top */
+    padding: 0 20px;
+    text-align: center;
 }
 
 .ethos-item {
-    background: rgba(30,33,37,0.6);
+    background: rgba(30,33,37,0.6); /* Your specified rgba background */
     backdrop-filter: blur(8px);
     color: var(--text-light);
     padding: 40px 35px;
     border-radius: 10px;
     border: 1px solid rgba(190,154,106,0.2);
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo), background-color 0.4s ease;
+    transition: transform 0.4s var(--ease-out-expo, cubic-bezier(0.25, 0.46, 0.45, 0.94)), box-shadow 0.4s var(--ease-out-expo, cubic-bezier(0.25, 0.46, 0.45, 0.94)), background-color 0.4s ease; /* Ensure ease-out-expo is defined or provide fallback */
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    opacity: 0; /* Initial state for animation */
+    transform: scale(0.95); /* Initial state for animation */
+}
+.ethos-item.is-visible {
+    opacity: 1;
+    transform: scale(1);
 }
 .ethos-item:hover {
     transform: translateY(-10px);
@@ -296,7 +389,7 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 25px;
-    transition: transform 0.4s var(--ease-out-expo);
+    transition: transform 0.4s var(--ease-out-expo, cubic-bezier(0.25, 0.46, 0.45, 0.94));
 }
 .ethos-icon i {
     font-size: 1.9rem;
@@ -319,15 +412,12 @@
 }
 
 
-/* --- RESPONSIVE ADJUSTMENTS FOR COLLECTION PAGE --- */
+/* ================================= */
+/* ======= Responsive Adjustments == */
+/* ================================= */
 
 @media (max-width: 1024px) {
-    /* .collection-hero-title {
-        font-size: 3.2rem;
-    }
-    .collection-hero-subtitle {
-        font-size: 1.15rem;
-    } */
+    /* Filters might stack on smaller desktops/laptops */
     .collection-controls-wrapper {
         flex-direction: column;
         align-items: stretch;
@@ -340,40 +430,25 @@
         max-width: 100%;
     }
     .collection-filters-placeholder {
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: row; /* Keep filters side by side if possible */
+        justify-content: center;
+        max-width: none; /* Allow full width to accommodate filters */
     }
-    .filter-select, .filter-apply-btn {
-        width: 100%;
+    .filter-group {
+        min-width: 150px; /* Allow them to shrink a bit */
+    }
+    .filter-select {
+        min-width: unset; /* Let width be controlled by flex-grow */
     }
 }
 
 @media (max-width: 768px) {
-    /* #collection-hero {
-        min-height: 55vh;
-        padding-top: calc(var(--header-height) + 20px); 
-    }
-    .collection-hero-title {
-        font-size: 2.8rem;
-    }
-    .collection-hero-subtitle {
-        font-size: 1.05rem;
-    }
-    .hero-cta-collection {
-        padding: 12px 30px;
-        font-size: 0.9rem;
-    } */
-
-    .collection-intro-text .section-title-alt {
-        font-size: 1.9rem;
-    }
-     .collection-intro-text p {
-        font-size: 1rem;
-    }
-
+    /* This media query makes the grid single column for smaller screens, which is likely intended */
     .products-grid-placeholder {
         grid-template-columns: 1fr; /* Single column for smaller screens */
         gap: 25px;
+        /* When it becomes 1fr here, it will still respect the max-width of its container.
+           So it won't stretch beyond 1200px (or whatever max-content-width is set to). */
     }
     .watch-card-image-wrapper { /* Adjust image height for smaller cards */
         height: 240px;
@@ -385,9 +460,15 @@
         font-size: 1.3rem;
     }
 
+    .collection-intro-text .section-title-alt {
+        font-size: 1.9rem;
+    }
+    .collection-intro-text p {
+        font-size: 1rem;
+    }
 
     .ethos-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Stack items on small screens */
     }
     .ethos-item {
         padding: 30px 25px;
@@ -398,15 +479,6 @@
 }
 
 @media (max-width: 480px) {
-   /*  #collection-hero {
-        min-height: 50vh;
-    }
-    .collection-hero-title {
-        font-size: 2.2rem;
-    }
-    .collection-hero-subtitle {
-        font-size: 0.95rem;
-    } */
     #collection-intro-filters {
         padding-top: 60px;
         padding-bottom: 40px;

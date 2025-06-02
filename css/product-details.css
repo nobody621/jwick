@@ -2,8 +2,8 @@
 
 /* --- GENERAL PAGE SETUP --- */
 .product-detail-page-main {
-    padding-top: var(--header-height); /* Adjust if your header has a fixed height */
-    background-color: #FCFCFA; /* Very light, almost white background for the page */
+    padding-top: var(--header-height);
+    background-color: #FCFCFA;
 }
 
 #product-detail-section {
@@ -66,19 +66,18 @@
     color: var(--text-dark-muted);
 }
 
-
 /* --- PRODUCT CONTENT WRAPPER --- */
 .product-content-wrapper {
     display: grid;
-    grid-template-columns: 1.2fr 1fr; /* Gallery slightly wider */
+    grid-template-columns: 1.2fr 1fr;
     gap: 50px;
-    align-items: flex-start; /* Align items to the top of their grid cell */
+    align-items: flex-start;
 }
 
 /* --- PRODUCT GALLERY --- */
 .product-gallery-column {
-    position: sticky; /* Makes gallery sticky while scrolling info */
-    top: calc(var(--header-height) + 30px); /* Adjust based on header height */
+    position: sticky;
+    top: calc(var(--header-height) + 30px);
 }
 
 .main-image-container {
@@ -93,23 +92,18 @@
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 1/1; /* Maintain square aspect ratio, adjust as needed */
+    aspect-ratio: 1/1;
     object-fit: cover;
-    transition: transform 0.3s ease-out; /* For potential zoom effects */
+    transition: transform 0.3s ease-out;
 }
-/* Optional: Zoom on hover for main image if not using a lightbox
-.main-image-container:hover #main-product-image {
-    transform: scale(1.03);
-}
-*/
 
 .thumbnail-gallery {
     display: flex;
     gap: 12px;
-    flex-wrap: wrap; /* Allow thumbnails to wrap if many */
+    flex-wrap: wrap;
 }
 .thumbnail-image {
-    width: 80px; /* Adjust size as needed */
+    width: 80px;
     height: 80px;
     object-fit: cover;
     border-radius: 8px;
@@ -128,8 +122,8 @@
     opacity: 1;
     box-shadow: 0 0 10px rgba(190,154,106,0.3);
 }
-.thumbnail-image.video-thumb::before { /* For video icon overlay */
-    content: "\f03d"; /* FontAwesome video icon */
+.thumbnail-image.video-thumb::before {
+    content: "\f03d";
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
     position: absolute;
@@ -148,10 +142,9 @@
     text-align: center;
 }
 
-
 /* --- PRODUCT INFO --- */
 .product-info-column {
-    padding: 10px; /* Small padding to not stick to edges if content is short */
+    padding: 10px;
 }
 
 .product-brand {
@@ -166,7 +159,7 @@
 
 .product-name {
     font-family: 'Playfair Display', serif;
-    font-size: 2.8rem; /* Prominent name */
+    font-size: 2.8rem;
     color: var(--text-dark, #1E2125);
     line-height: 1.2;
     margin-bottom: 15px;
@@ -175,7 +168,7 @@
 
 .product-price {
     font-family: 'Outfit', sans-serif;
-    font-size: 2rem; /* Large price */
+    font-size: 2rem;
     color: var(--primary-deep-charcoal);
     font-weight: 600;
     margin-bottom: 30px;
@@ -188,7 +181,7 @@
     margin-bottom: 30px;
 }
 
-.section-subtitle { /* For "Description", "Additional Details" */
+.section-subtitle {
     font-family: 'Outfit', sans-serif;
     font-size: 1.3rem;
     font-weight: 600;
@@ -196,7 +189,7 @@
     margin-bottom: 15px;
     padding-bottom: 10px;
     border-bottom: 2px solid var(--accent-antique-gold);
-    display: inline-block; /* So border only spans text */
+    display: inline-block;
 }
 
 .product-description {
@@ -204,49 +197,86 @@
     font-size: 1.05rem;
     line-height: 1.8;
     color: var(--text-dark-muted, #555);
-    white-space: pre-line; /* Preserve line breaks from description */
+    white-space: pre-line;
 }
 
 .product-actions {
     display: flex;
-    flex-direction: column; /* Stack buttons */
-    gap: 15px;
-    margin-bottom: 30px;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 35px;
 }
 
-.cta-button { /* General CTA button styling */
+.cta-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 15px 30px;
+    padding: 16px 35px;
     font-family: 'Outfit', sans-serif;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 1.05rem;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
+    letter-spacing: 1px;
     text-decoration: none;
-    border-radius: 50px; /* Pill shape */
-    transition: all 0.3s ease;
+    border-radius: 50px;
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
     cursor: pointer;
     border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
 }
 .cta-button i {
-    margin-right: 10px;
-    font-size: 1.1em;
+    margin-right: 12px;
+    font-size: 1.2em;
 }
 
 .cta-button-primary {
     background-color: var(--accent-antique-gold);
     color: var(--primary-deep-charcoal);
-    box-shadow: 0 4px 15px rgba(190,154,106,0.2);
+    box-shadow: 0 6px 20px rgba(190,154,106,0.35);
+    animation: buttonAppear 0.8s 0.5s backwards cubic-bezier(0.25, 0.8, 0.25, 1);
 }
+
+@keyframes buttonAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.cta-button-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 80%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: skewX(-25deg);
+    transition: left 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.cta-button-primary:hover::before {
+    left: 120%;
+}
+
 .cta-button-primary:hover {
-    background-color: #D4AF7B; /* Lighter gold */
-    transform: translateY(-2px);
+    background-color: #DAB17B;
+    color: var(--primary-deep-charcoal);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(190,154,106,0.5);
+}
+
+.cta-button-primary:active {
+    transform: translateY(-1px) scale(1.02);
     box-shadow: 0 6px 20px rgba(190,154,106,0.3);
 }
 
-.cta-button-secondary { /* For video link */
+.cta-button-secondary {
     background-color: var(--primary-deep-charcoal);
     color: var(--text-light);
 }
@@ -255,7 +285,6 @@
     transform: translateY(-2px);
 }
 
-
 .cta-button-outline {
     background-color: transparent;
     color: var(--accent-antique-gold);
@@ -263,7 +292,8 @@
 }
 .cta-button-outline:hover {
     background-color: var(--accent-antique-gold-translucent, rgba(190,154,106,0.1));
-    color: #A8875F; /* Darker gold */
+    color: #A8875F;
+    transform: translateY(-2px);
 }
 
 .product-meta-info p {
@@ -278,17 +308,189 @@
     font-weight: 500;
 }
 
+#buy-now-button i.fa-shield-alt {
+    margin-right: 12px;
+}
+
+/* --- DELIVERY INFORMATION SECTION --- */
+.delivery-info-section {
+    background-color: #fff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.12);
+    margin-top: 40px;
+    border: 1px solid #EAEAEA;
+}
+
+.delivery-form-header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #EAEAEA;
+    padding-bottom: 25px;
+}
+.delivery-form-header i.fa-truck {
+    font-size: 2.5rem;
+    color: var(--accent-antique-gold);
+    margin-bottom: 15px;
+    display: block;
+}
+.delivery-form-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+.delivery-form-header p {
+    font-size: 1rem;
+    color: var(--text-dark-muted);
+}
+
+.delivery-form .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+.delivery-form .form-group {
+    margin-bottom: 20px;
+}
+.delivery-form label {
+    display: block;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+.delivery-form label .required-asterisk {
+    color: var(--accent-antique-gold);
+    margin-left: 2px;
+    font-weight: bold;
+}
+
+.delivery-form input[type="text"],
+.delivery-form input[type="email"],
+.delivery-form input[type="tel"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #D0D0D0;
+    border-radius: 6px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    color: var(--text-dark);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fdfdfd;
+}
+.delivery-form input[type="text"]:focus,
+.delivery-form input[type="email"]:focus,
+.delivery-form input[type="tel"]:focus {
+    border-color: var(--accent-antique-gold);
+    box-shadow: 0 0 0 3px var(--accent-antique-gold-translucent);
+    outline: none;
+    background-color: #fff;
+}
+.delivery-form input::placeholder {
+    color: #aaa;
+    opacity: 1;
+}
+.delivery-form .info-link {
+    color: var(--accent-antique-gold);
+    text-decoration: none;
+    font-weight: 500;
+}
+.delivery-form .info-link:hover {
+    text-decoration: underline;
+}
+.delivery-form small {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-dark-muted);
+    margin-top: 5px;
+}
+
+.delivery-form .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #EAEAEA;
+}
+
+.cta-button-special { /* Used for proceed-to-payment-button */
+    background: linear-gradient(135deg, var(--accent-antique-gold) 0%, #DAB17B 100%);
+    color: #fff !important;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    box-shadow: 0 8px 25px rgba(190,154,106,0.4);
+}
+.cta-button-special:hover {
+    background: linear-gradient(135deg, #DAB17B 0%, var(--accent-antique-gold) 100%);
+    color: #fff !important;
+    box-shadow: 0 12px 35px rgba(190,154,106,0.55);
+    transform: translateY(-4px) scale(1.03);
+}
+.cta-button-special i.fa-credit-card {
+    color: #fff;
+    font-size: 1.2em;
+}
+
+.form-error-message {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: #c0392b;
+    padding: 12px 18px;
+    border-radius: 6px;
+    border-left: 4px solid #e74c3c;
+    margin-top: 20px;
+    font-size: 0.95rem;
+    text-align: left;
+}
+.form-error-message::before {
+    content: "\f071";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    margin-right: 10px;
+}
+
+/* --- FLOATING WHATSAPP BUTTON --- */
+.floating-whatsapp-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #25D366; /* WhatsApp Green */
+    color: #FFF;
+    border-radius: 50%;
+    display: flex; /* Use flex to center icon */
+    align-items: center;
+    justify-content: center;
+    font-size: 28px; /* Icon size */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    z-index: 1000; /* Ensure it's above other content */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.floating-whatsapp-btn:hover {
+    background-color: #1DAE54; /* Darker WhatsApp Green */
+    transform: scale(1.1);
+}
+
+.floating-whatsapp-btn i.fa-whatsapp {
+    margin: 0; /* Remove any margin if inherited */
+}
+
 
 /* --- RESPONSIVE ADJUSTMENTS --- */
-@media (max-width: 992px) { /* Tablet and below */
+@media (max-width: 992px) {
     .product-content-wrapper {
-        grid-template-columns: 1fr; /* Stack columns */
+        grid-template-columns: 1fr;
         gap: 40px;
     }
     .product-gallery-column {
-        position: static; /* Remove sticky behavior on smaller screens */
+        position: static;
         top: auto;
-        max-width: 600px; /* Limit gallery width */
+        max-width: 600px;
         margin-left: auto;
         margin-right: auto;
     }
@@ -300,7 +502,7 @@
     }
 }
 
-@media (max-width: 768px) { /* Mobile */
+@media (max-width: 768px) {
     #product-detail-section {
         padding-top: 30px;
         padding-bottom: 60px;
@@ -326,13 +528,38 @@
     }
     .section-subtitle {
         font-size: 1.15rem;
+        text-align: left;
+        display: inline-block;
     }
     .product-description {
         font-size: 1rem;
     }
     .cta-button {
-        padding: 12px 25px;
-        font-size: 0.95rem;
+        padding: 14px 30px;
+        font-size: 1rem;
+    }
+    .delivery-info-section {
+        padding: 30px 20px;
+    }
+    .delivery-form-header h2 {
+        font-size: 1.7rem;
+    }
+    .delivery-form .form-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    .delivery-form .form-actions {
+        flex-direction: column;
+    }
+    .delivery-form .form-actions .cta-button {
+        width: 100%;
+    }
+    .floating-whatsapp-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        bottom: 20px;
+        right: 20px;
     }
 }
 
@@ -346,5 +573,21 @@
     }
      .product-price {
         font-size: 1.5rem;
+    }
+     .cta-button {
+        padding: 12px 25px;
+        font-size: 0.95rem;
+    }
+    .delivery-form-header h2 {
+        font-size: 1.5rem;
+    }
+    .delivery-form label {
+        font-size: 0.85rem;
+    }
+    .delivery-form input[type="text"],
+    .delivery-form input[type="email"],
+    .delivery-form input[type="tel"] {
+        font-size: 0.95rem;
+        padding: 10px 12px;
     }
 }
